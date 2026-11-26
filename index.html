@@ -1,435 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#3b080f">
-  <meta name="description" content="A celebration of love. Join us for our wedding.">
-  <meta property="og:title" content="Our Wedding Celebration">
-  <meta property="og:description" content="Together with our families, we invite you to celebrate our wedding.">
-  <title>Our Wedding | A Celebration of Love</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --burgundy: #3b080f;
-      --wine: #681b29;
-      --wine-light: #842d3b;
-      --gold: #c5a365;
-      --gold-light: #e4c98f;
-      --ivory: #f5ebdd;
-      --cream: #fffaf2;
-      --ink: #2b1718;
-      --muted: #bcae9f;
-      --line: rgba(197,163,101,.42);
-      --serif: "Cormorant Garamond", Georgia, serif;
-      --sans: "Montserrat", Arial, sans-serif;
-      --shadow: 0 18px 55px rgba(0,0,0,.28);
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-    body {
-      margin: 0; color: var(--ivory); background: var(--burgundy);
-      font-family: var(--serif); overflow-x: hidden;
-    }
-    a { color: inherit; }
-    button, input, textarea, select { font: inherit; }
-    .topbar {
-      position: sticky; top: 0; z-index: 50;
-      background: rgba(39,5,10,.94); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav {
-      max-width: 1180px; margin: auto; padding: 12px 22px;
-      display: flex; align-items: center; justify-content: space-between; gap: 18px;
-    }
-    .brand {
-      color: var(--gold-light); font: 600 12px var(--sans);
-      letter-spacing: .24em; white-space: nowrap;
-    }
-    .navlinks { display:flex; gap:20px; align-items:center; }
-    .navlinks a {
-      text-decoration:none; color:#eadac3; font:500 10px var(--sans);
-      text-transform:uppercase; letter-spacing:.12em; white-space:nowrap;
-    }
-    .navlinks a:hover { color:var(--gold-light); }
-    .nav-tools { display:flex; gap:8px; align-items:center; }
-    .language {
-      background:transparent; color:var(--ivory); border:1px solid var(--line);
-      border-radius:2px; padding:8px; font:11px var(--sans);
-    }
-    .language option { color:#241316; }
-    .btn, button {
-      display:inline-block; cursor:pointer; text-decoration:none;
-      border:1px solid var(--gold); background:var(--gold); color:#2b1113;
-      padding:12px 20px; font:600 10px var(--sans); letter-spacing:.12em;
-      text-transform:uppercase; transition:.2s ease;
-    }
-    .btn:hover, button:hover { background:var(--gold-light); border-color:var(--gold-light); transform:translateY(-1px); }
-    .btn-outline { background:transparent; color:var(--gold-light); }
-    .btn-outline:hover { color:#2b1113; }
-    .hero {
-      min-height: min(850px, calc(100vh - 55px)); position:relative;
-      display:grid; place-items:center; text-align:center; overflow:hidden;
-      padding:100px 20px 90px;
-      background:
-        radial-gradient(ellipse at 50% 40%, rgba(123,35,48,.52), transparent 54%),
-        linear-gradient(145deg,#26050a 0%,#4a0c16 52%,#26050a 100%);
-    }
-    .hero:before, .hero:after {
-      content:""; position:absolute; width:min(34vw,390px); height:min(34vw,390px);
-      opacity:.8; pointer-events:none; background-repeat:no-repeat; background-size:contain;
-      background-image:url("assets/floral-corner.png");
-    }
-    .hero:before { top:-24px; left:-28px; }
-    .hero:after { right:-28px; bottom:-25px; transform:rotate(180deg); }
-    .hero-inner { max-width:820px; position:relative; z-index:2; }
-    .eyebrow {
-      font:500 10px var(--sans); letter-spacing:.3em; text-transform:uppercase;
-      color:var(--gold-light);
-    }
-    .ornament { color:var(--gold); display:flex; justify-content:center; align-items:center; gap:15px; margin:24px auto; }
-    .ornament:before,.ornament:after { content:""; width:75px; height:1px; background:var(--gold); }
-    h1 {
-      margin:12px 0; color:var(--gold-light); font:400 clamp(60px,10vw,112px)/.83 var(--serif);
-      text-shadow:0 3px 25px rgba(0,0,0,.25);
-    }
-    .amp { display:block; font-style:italic; font-size:.53em; line-height:1.25; color:var(--ivory); }
-    .hero-sub { color:#f1e4d4; font-size:clamp(17px,2.2vw,22px); line-height:1.6; margin:28px auto 12px; }
-    .hero-date { color:var(--gold-light); font:500 12px var(--sans); letter-spacing:.22em; margin:26px 0 32px; }
-    .hero-actions { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
-    .section { padding:88px 20px; position:relative; }
-    .wrap { max-width:1080px; margin:auto; }
-    .section-head { text-align:center; margin:0 auto 42px; max-width:720px; }
-    .section-head h2 { color:var(--gold-light); font:400 clamp(39px,6vw,58px)/1 var(--serif); margin:12px 0; }
-    .section-head p { color:#d2c0ae; font:12px/1.9 var(--sans); }
-    .dark-panel { background:#2a060c; }
-    .light-panel { background:var(--ivory); color:var(--ink); }
-    .light-panel .section-head h2 { color:#5a1721; }
-    .light-panel .section-head p { color:#725d55; }
-    .countdown { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; max-width:690px; margin:34px auto 0; }
-    .countbox { border:1px solid var(--line); padding:22px 8px; text-align:center; background:rgba(255,255,255,.025); }
-    .countbox strong { display:block; color:var(--gold-light); font:400 clamp(34px,5vw,48px) var(--serif); }
-    .countbox span { color:#cbb9a5; font:9px var(--sans); letter-spacing:.18em; text-transform:uppercase; }
-    .couple { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-    .person { text-align:center; padding:24px; border:1px solid var(--line); background:rgba(255,255,255,.025); }
-    .portrait { height:350px; max-width:330px; margin:0 auto 22px; border:1px solid var(--gold); padding:7px; background:#4a1920; }
-    .portrait img { width:100%; height:100%; object-fit:cover; display:block; }
-    .portrait .placeholder { height:100%; display:grid; place-items:center; color:var(--gold-light); font-size:55px; background:linear-gradient(145deg,#702b37,#2e080e); }
-    .person h3 { color:var(--gold-light); font:400 38px var(--serif); margin:8px 0; }
-    .person p { color:#d1bdab; font:11px/1.9 var(--sans); }
-    .events { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-    .event { padding:28px 20px; text-align:center; border:1px solid var(--line); background:rgba(255,255,255,.025); }
-    .event .symbol { color:var(--gold); font-size:28px; }
-    .event h3 { color:var(--gold-light); font:400 30px var(--serif); margin:12px 0 8px; }
-    .event p { color:#d1bdab; font:10px/1.9 var(--sans); margin:4px 0; }
-    .gallery { background:linear-gradient(145deg,#27060b,#4b101b); }
-    .photos { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-    .photos img { width:100%; height:290px; object-fit:cover; border:1px solid var(--line); background:#4a1920; }
-    .video-frame { max-width:820px; margin:auto; padding:9px; border:1px solid var(--gold); background:#180408; box-shadow:var(--shadow); }
-    video { display:block; width:100%; max-height:470px; background:#100306; }
-    .venue-card { max-width:760px; margin:auto; padding:38px 25px; text-align:center; border:1px solid var(--line); background:rgba(255,255,255,.025); }
-    .venue-card h3 { color:var(--gold-light); font:400 36px var(--serif); margin:10px 0; }
-    .venue-card p { color:#d1bdab; font:11px/1.9 var(--sans); }
-    .rsvp { background:linear-gradient(145deg,#4b101b,#27060b); }
-    .rsvp-form { max-width:650px; margin:auto; padding:30px; background:#f8f0e5; color:#2d1b19; border:1px solid var(--gold); }
-    .field { margin:15px 0; }
-    label { display:block; color:#654a3f; font:600 9px var(--sans); letter-spacing:.12em; text-transform:uppercase; margin-bottom:7px; }
-    input,textarea,.rsvp-form select { width:100%; padding:13px; border:1px solid #d8c6ac; background:#fffdf8; color:#2d1b19; border-radius:0; font:12px var(--sans); }
-    textarea { min-height:90px; resize:vertical; }
-    .form-note { color:#7b685c; font:10px/1.7 var(--sans); }
-    footer { text-align:center; padding:50px 20px; background:#210409; border-top:1px solid var(--line); }
-    footer .names { color:var(--gold-light); font:400 40px var(--serif); }
-    footer p { color:#cbb9a5; font:10px var(--sans); letter-spacing:.08em; }
-    .music-btn { position:fixed; right:18px; bottom:18px; z-index:60; width:48px; height:48px; border-radius:50%; padding:0; font-size:18px; box-shadow:var(--shadow); }
-    .small-note { text-align:center; color:#bda996; font:10px/1.7 var(--sans); margin-top:20px; }
-    @media(max-width:850px) {
-      .nav { flex-wrap:wrap; justify-content:center; }
-      .navlinks { order:3; width:100%; overflow:auto; justify-content:flex-start; padding:8px 0; gap:17px; }
-      .nav-tools { margin-left:auto; }
-      .events { grid-template-columns:1fr; }
-      .portrait { height:290px; }
-    }
-    @media(max-width:600px) {
-      .hero { min-height:690px; padding:90px 18px; }
-      .hero:before,.hero:after { width:48vw; height:48vw; }
-      .couple { grid-template-columns:1fr; }
-      .photos { grid-template-columns:repeat(2,1fr); gap:9px; }
-      .photos img { height:190px; }
-      .countdown { gap:7px; }
-      .countbox { padding:15px 4px; }
-      .section { padding:65px 15px; }
-      .rsvp-form { padding:22px 17px; }
-      .brand { font-size:10px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#3b080f">
+<meta name="description" content="Jedidiah and Neelima invite you to celebrate their wedding on 16 December 2026 in Sanathnagar, Hyderabad.">
+<meta property="og:title" content="Jedidiah & Neelima | Wedding Invitation">
+<meta property="og:description" content="Wednesday, 16 December 2026 at 10:00 AM · Baptist Church Sanathnagar, Hyderabad">
+<title>Jedidiah & Neelima | Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--burgundy:#3b080f;--wine:#681b29;--gold:#c5a365;--gold-light:#e4c98f;--ivory:#f5ebdd;--ink:#2b1718;--line:rgba(197,163,101,.42);--serif:"Cormorant Garamond",Georgia,serif;--sans:"Montserrat",Arial,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:var(--burgundy);color:var(--ivory);font-family:var(--serif)}a{color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(39,5,10,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav{max-width:1150px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{color:var(--gold-light);font:600 11px var(--sans);letter-spacing:.2em}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap}.navlinks a{text-decoration:none;color:#eadac3;font:500 10px var(--sans);letter-spacing:.1em;text-transform:uppercase}.navlinks a:hover{color:var(--gold-light)}
+.navtools{display:flex;gap:8px;align-items:center}.language,button,.btn{font:600 10px var(--sans);letter-spacing:.1em;text-transform:uppercase}
+.language{background:transparent;color:var(--ivory);border:1px solid var(--line);padding:9px}.language option{color:#222}
+button,.btn{display:inline-block;cursor:pointer;text-decoration:none;border:1px solid var(--gold);background:var(--gold);color:#2b1113;padding:12px 18px}.outline{background:transparent;color:var(--gold-light)}
+.hero{min-height:690px;display:grid;place-items:center;text-align:center;padding:90px 20px;background:radial-gradient(ellipse at center,rgba(123,35,48,.6),transparent 58%),linear-gradient(145deg,#26050a,#4a0c16 52%,#26050a);position:relative;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;width:min(32vw,340px);height:min(32vw,340px);background:url("assets/floral-corner.png") center/contain no-repeat;opacity:.7;pointer-events:none}.hero:before{top:-20px;left:-25px}.hero:after{right:-25px;bottom:-20px;transform:rotate(180deg)}
+.hero-inner{max-width:850px;position:relative;z-index:1}.eyebrow{color:var(--gold-light);font:500 10px var(--sans);letter-spacing:.28em;text-transform:uppercase}
+.ornament{color:var(--gold);margin:22px auto;font-size:24px}h1{margin:14px 0;color:var(--gold-light);font:400 clamp(56px,9vw,105px)/.9 var(--serif)}h1 small{display:block;color:var(--ivory);font-style:italic;font-size:.48em;line-height:1.4}
+.hero-sub{font-size:clamp(17px,2.3vw,23px);line-height:1.6;color:#f1e4d4}.hero-date{margin:28px 0;color:var(--gold-light);font:500 12px var(--sans);letter-spacing:.18em}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.section{padding:78px 20px}.wrap{max-width:1050px;margin:auto}.dark{background:#2a060c}.light{background:var(--ivory);color:var(--ink)}.head{text-align:center;max-width:740px;margin:0 auto 38px}.head h2{font:400 clamp(38px,6vw,58px)/1 var(--serif);color:var(--gold-light);margin:12px 0}.light .head h2{color:#5a1721}.head p{font:12px/1.9 var(--sans);color:#d2c0ae}.light .head p{color:#725d55}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:680px;margin:30px auto}.countbox{text-align:center;padding:20px 8px;border:1px solid var(--line)}.countbox strong{display:block;color:var(--gold-light);font:400 clamp(32px,5vw,48px) var(--serif)}.countbox span{font:9px var(--sans);letter-spacing:.14em;color:#cbb9a5;text-transform:uppercase}
+.invite-copy{max-width:800px;margin:auto;text-align:center;font-size:20px;line-height:1.75}.invite-copy strong{color:#6b2430}.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}.detail{padding:25px;border:1px solid var(--line);text-align:center;background:rgba(255,255,255,.025)}.detail h3{font:400 28px var(--serif);color:var(--gold-light);margin:8px}.detail p{font:11px/1.9 var(--sans);color:#d1bdab;margin:4px}
+.events{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.event{padding:26px 20px;text-align:center;border:1px solid var(--line)}.event h3{font:400 29px var(--serif);color:var(--gold-light);margin:10px}.event p{font:11px/1.9 var(--sans);color:#d1bdab;margin:4px}
+.video-frame{max-width:820px;margin:auto;padding:9px;border:1px solid var(--gold);background:#180408}video{display:block;width:100%;max-height:470px;background:#100306}
+.venue{text-align:center;max-width:760px;margin:auto;padding:35px 24px;border:1px solid var(--line)}.venue h3{font:400 36px var(--serif);color:var(--gold-light);margin:10px}.venue p{font:12px/1.9 var(--sans);color:#d1bdab}
+.pastors{font:12px/2 var(--sans);color:#d1bdab}.rsvp{background:linear-gradient(145deg,#4b101b,#27060b)}.rsvp-form{max-width:620px;margin:auto;padding:28px;background:#f8f0e5;color:#2d1b19;border:1px solid var(--gold)}.field{margin:14px 0}label{display:block;font:600 9px var(--sans);color:#654a3f;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}input,textarea,form select{width:100%;padding:12px;border:1px solid #d8c6ac;background:#fffdf8;color:#2d1b19;font:12px var(--sans)}textarea{min-height:80px}.form-note{font:10px/1.7 var(--sans);color:#7b685c}
+footer{text-align:center;padding:45px 20px;background:#210409;border-top:1px solid var(--line)}footer .names{font:400 40px var(--serif);color:var(--gold-light)}footer p{font:10px var(--sans);color:#cbb9a5;letter-spacing:.08em}
+.music{position:fixed;right:18px;bottom:18px;z-index:30;border-radius:50%;width:48px;height:48px;padding:0;font-size:18px}
+@media(max-width:800px){.nav{flex-wrap:wrap;justify-content:center}.navlinks{order:3;width:100%;overflow:auto;flex-wrap:nowrap;padding:8px 0}.navtools{margin-left:auto}}
+@media(max-width:600px){.hero{min-height:650px;padding:80px 18px}.detail-grid,.events{grid-template-columns:1fr}.countdown{gap:6px}.countbox{padding:14px 3px}.section{padding:62px 15px}}
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <nav class="nav">
-      <div class="brand">A CELEBRATION OF LOVE</div>
-      <div class="navlinks">
-        <a href="#home" data-en="Home" data-te="హోమ్" data-hi="होम">Home</a>
-        <a href="#countdown" data-en="Countdown" data-te="కౌంట్‌డౌన్" data-hi="उलटी गिनती">Countdown</a>
-        <a href="#events" data-en="Events" data-te="వేడుకలు" data-hi="कार्यक्रम">Events</a>
-        <a href="#gallery" data-en="Gallery" data-te="ఫోటోలు" data-hi="गैलरी">Gallery</a>
-        <a href="#venue" data-en="Venue" data-te="వేదిక" data-hi="स्थान">Venue</a>
-        <a href="#rsvp" data-en="RSVP" data-te="హాజరు" data-hi="जवाब">RSVP</a>
-      </div>
-      <div class="nav-tools">
-        <select class="language" id="language" aria-label="Select language">
-          <option value="en">EN</option><option value="te">తెలుగు</option><option value="hi">हिन्दी</option>
-        </select>
-        <button class="btn-outline" id="shareBtn" type="button">Share</button>
-      </div>
-    </nav>
-  </header>
+<header class="topbar"><nav class="nav">
+<div class="brand">A CELEBRATION OF LOVE</div>
+<div class="navlinks">
+<a href="#home" data-en="Home" data-te="హోమ్" data-hi="होम">Home</a><a href="#countdown" data-en="Countdown" data-te="కౌంట్‌డౌన్" data-hi="उलटी गिनती">Countdown</a><a href="#events" data-en="Events" data-te="వేడుకలు" data-hi="कार्यक्रम">Events</a><a href="#venue" data-en="Venue" data-te="వేదిక" data-hi="स्थान">Venue</a><a href="#rsvp">RSVP</a>
+</div>
+<div class="navtools"><select class="language" id="language" aria-label="Choose language"><option value="en">EN</option><option value="te">తెలుగు</option><option value="hi">हिन्दी</option></select><button class="outline" id="shareBtn" type="button">Share</button></div>
+</nav></header>
+<main>
+<section class="hero" id="home"><div class="hero-inner">
+<div class="eyebrow">Together with our families</div><div class="ornament">✧ ❦ ✧</div>
+<h1>Jedidiah <small>weds</small> Neelima</h1>
+<p class="hero-sub">With joyful hearts and family prayers,<br>we invite you to celebrate the Holy Matrimony of</p>
+<div class="hero-date">WEDNESDAY · 16 DECEMBER 2026 · 10:00 AM</div>
+<div class="actions"><a class="btn" href="#countdown">Save the Date</a><a class="btn outline" href="#venue">View Venue</a></div>
+</div></section>
+<section class="section dark" id="countdown"><div class="wrap"><div class="head"><div class="eyebrow">THE COUNTDOWN BEGINS</div><h2>Until We Say “I Do”</h2><p>We look forward to celebrating this blessed day with you.</p></div>
+<div class="countdown"><div class="countbox"><strong id="days">--</strong><span>Days</span></div><div class="countbox"><strong id="hours">--</strong><span>Hours</span></div><div class="countbox"><strong id="minutes">--</strong><span>Minutes</span></div><div class="countbox"><strong id="seconds">--</strong><span>Seconds</span></div></div>
+</div></section>
+<section class="section light" id="invitation"><div class="wrap"><div class="head"><div class="eyebrow">A FAMILY INVITATION</div><h2>Wedding Invitation</h2><p>“Marriage is honourable in all.” — Hebrews 13:4</p></div>
+<div class="invite-copy">We cordially invite your gracious presence with family prayers to share the joy on the Holy Matrimony of our younger son<br><strong>Jedidiah (JSK)</strong><br>with<br><strong>Neelima</strong>.<br><br>Grace the occasion and bless the couple.</div>
+<div class="detail-grid"><div class="detail"><div class="eyebrow">OFFICIATING PASTORS</div><h3>With God's Blessings</h3><p>Rev. Dr. K. Daniel Solomon Garu<br>Senior Pastor</p><p>Rev. S. Sudhir Kumar Garu<br>Associate Pastor</p></div>
+<div class="detail"><div class="eyebrow">INVITED BY</div><h3>With Love</h3><p>Sri Nelluri Ratna</p><p>Smt. Krishnaveni (Krupaveni)</p></div></div>
+</div></section>
+<section class="section dark" id="events"><div class="wrap"><div class="head"><div class="eyebrow">JOIN OUR CELEBRATION</div><h2>Wedding Events</h2><p>A blessed ceremony followed by a joyful gathering with family and friends.</p></div>
+<div class="events"><article class="event"><div class="eyebrow">10:00 AM</div><h3>Holy Matrimony</h3><p>Wednesday, 16 December 2026</p><p>Baptist Church Sanathnagar</p></article><article class="event"><div class="eyebrow">Following the ceremony</div><h3>Reception & Lunch</h3><p>Join us after the wedding ceremony</p><p>Sanathnagar, Hyderabad</p></article></div>
+</div></section>
+<section class="section light" id="film"><div class="wrap"><div class="head"><div class="eyebrow">A LITTLE FILM OF LOVE</div><h2>Our Invitation Film</h2><p>Watch our wedding invitation video.</p></div><div class="video-frame"><video controls playsinline preload="metadata"><source src="assets/wedding-invitation.mp4" type="video/mp4">Your browser does not support video playback.</video></div><p class="form-note" style="text-align:center">Add your video as assets/wedding-invitation.mp4 to display it here.</p></div></section>
+<section class="section dark" id="venue"><div class="wrap"><div class="head"><div class="eyebrow">WE LOOK FORWARD TO SEEING YOU</div><h2>The Wedding Venue</h2></div>
+<div class="venue"><div class="ornament">✧ ❦ ✧</div><h3>Baptist Church Sanathnagar</h3><p>Bungalow No. 17, Czech Colony, Street No. 3,<br>Sanathnagar, Hyderabad, Telangana.</p><p><strong>Wednesday, 16 December 2026 · 10:00 AM</strong></p><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Baptist+Church+Sanathnagar%2C+Bungalow+No.+17%2C+Czech+Colony%2C+Street+No.+3%2C+Sanathnagar%2C+Hyderabad" target="_blank" rel="noopener">Open Google Maps</a></div>
+</div></section>
+<section class="section rsvp" id="rsvp"><div class="wrap"><div class="head"><div class="eyebrow">KINDLY RESPOND</div><h2>Will You Join Us?</h2><p>Your presence will make our celebration complete.</p></div>
+<form class="rsvp-form" id="rsvpForm"><div class="field"><label for="guestName">Your name</label><input id="guestName" required placeholder="Enter your name"></div><div class="field"><label for="guestCount">Number of guests</label><input id="guestCount" type="number" min="1" max="20" value="1" required></div><div class="field"><label for="attendance">Your response</label><select id="attendance"><option>Joyfully Accept</option><option>Regretfully Decline</option></select></div><div class="field"><label for="guestMessage">Message (optional)</label><textarea id="guestMessage" placeholder="Leave us a lovely note"></textarea></div><button type="submit">Send RSVP on WhatsApp</button><p class="form-note">Your RSVP will be sent directly to the wedding WhatsApp contact.</p></form></div></section>
+</main>
+<footer><div class="ornament">✧ ❦ ✧</div><div class="names">Jedidiah & Neelima</div><p>WITH LOVE, TOGETHER WITH OUR FAMILIES</p><p>“Marriage is honourable in all.” · Hebrews 13:4</p></footer>
+<audio id="bgMusic" loop preload="none"><source src="assets/background-music.mp3" type="audio/mpeg"></audio><button class="music" id="musicBtn" type="button" aria-label="Play or pause background music">♫</button>
+<script>
+const CONFIG={weddingDate:"2026-12-16T10:00:00+05:30",whatsappNumber:"919030827969"};
+const $=id=>document.getElementById(id);
+function tick(){const ms=new Date(CONFIG.weddingDate).getTime()-Date.now();if(ms<=0){["days","hours","minutes","seconds"].forEach(id=>$(id).textContent="00");return} $("days").textContent=Math.floor(ms/86400000);$("hours").textContent=String(Math.floor(ms%86400000/3600000)).padStart(2,"0");$("minutes").textContent=String(Math.floor(ms%3600000/60000)).padStart(2,"0");$("seconds").textContent=String(Math.floor(ms%60000/1000)).padStart(2,"0")}
+tick();setInterval(tick,1000);
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-inner">
-        <div class="eyebrow" data-en="Together with our families" data-te="మా కుటుంబాల ఆశీస్సులతో" data-hi="अपने परिवारों के साथ">Together with our families</div>
-        <div class="ornament">✧ ❦ ✧</div>
-        <h1><span id="brideName">Bride Name</span><span class="amp">and</span><span id="groomName">Groom Name</span></h1>
-        <p class="hero-sub" data-en="Invite you to celebrate the beginning of their forever." data-te="మా జీవితంలోని కొత్త ప్రయాణాన్ని జరుపుకోవడానికి మిమ్మల్ని ఆహ్వానిస్తున్నాము." data-hi="हमारे नए जीवन की शुरुआत का जश्न मनाने के लिए आपको आमंत्रित करते हैं।">Invite you to celebrate the beginning of their forever.</p>
-        <div class="hero-date" id="heroDate">DATE • CITY</div>
-        <div class="hero-actions">
-          <a class="btn" href="#countdown" data-en="Save the Date" data-te="తేదీని గుర్తుంచుకోండి" data-hi="तारीख़ याद रखें">Save the Date</a>
-          <a class="btn btn-outline" href="#events" data-en="View Events" data-te="వేడుకలు చూడండి" data-hi="कार्यक्रम देखें">View Events</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark-panel" id="countdown">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="eyebrow">THE COUNTDOWN BEGINS</div>
-          <h2 data-en="Until We Say I Do" data-te="ఆ శుభక్షణం వరకు" data-hi="उस शुभ पल तक">Until We Say I Do</h2>
-          <p id="countdownMessage">We cannot wait to celebrate with you.</p>
-        </div>
-        <div class="countdown">
-          <div class="countbox"><strong id="days">--</strong><span>Days</span></div>
-          <div class="countbox"><strong id="hours">--</strong><span>Hours</span></div>
-          <div class="countbox"><strong id="minutes">--</strong><span>Minutes</span></div>
-          <div class="countbox"><strong id="seconds">--</strong><span>Seconds</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section light-panel" id="couple">
-      <div class="wrap">
-        <div class="section-head"><div class="eyebrow">TWO HEARTS • ONE JOURNEY</div><h2 data-en="Meet the Couple" data-te="వధూవరులను కలవండి" data-hi="मिलिए दूल्हा-दुल्हन से">Meet the Couple</h2><p>A little about the two hearts behind this celebration.</p></div>
-        <div class="couple">
-          <article class="person"><div class="portrait"><img id="bridePhoto" src="assets/bride.jpg" alt="Bride portrait" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>♡</div>'"></div><h3 id="brideCardName">Bride Name</h3><p id="brideBio">A little introduction about the bride.</p></article>
-          <article class="person"><div class="portrait"><img id="groomPhoto" src="assets/groom.jpg" alt="Groom portrait" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>♡</div>'"></div><h3 id="groomCardName">Groom Name</h3><p id="groomBio">A little introduction about the groom.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark-panel" id="events">
-      <div class="wrap">
-        <div class="section-head"><div class="eyebrow">JOIN OUR CELEBRATION</div><h2 data-en="Wedding Events" data-te="వివాహ వేడుకలు" data-hi="शादी के समारोह">Wedding Events</h2><p>Every moment is more special when shared with family and friends.</p></div>
-        <div class="events" id="eventCards"></div>
-      </div>
-    </section>
-
-    <section class="section gallery" id="gallery">
-      <div class="wrap">
-        <div class="section-head"><div class="eyebrow">MOMENTS TO TREASURE</div><h2 data-en="Our Gallery" data-te="మధుర జ్ఞాపకాలు" data-hi="हमारी यादें">Our Gallery</h2><p>Some favourite moments from our journey together.</p></div>
-        <div class="photos" id="photoGrid"></div>
-      </div>
-    </section>
-
-    <section class="section light-panel" id="invitation">
-      <div class="wrap">
-        <div class="section-head"><div class="eyebrow">A LITTLE FILM OF LOVE</div><h2 data-en="Our Invitation Film" data-te="మా ఆహ్వాన వీడియో" data-hi="हमारा निमंत्रण वीडियो">Our Invitation Film</h2><p>Add your invitation video to the assets folder to show it here.</p></div>
-        <div class="video-frame"><video id="inviteVideo" controls playsinline preload="metadata"><source id="videoSource" src="assets/wedding-invitation.mp4" type="video/mp4">Your browser does not support video playback.</video></div>
-      </div>
-    </section>
-
-    <section class="section dark-panel" id="venue">
-      <div class="wrap">
-        <div class="section-head"><div class="eyebrow">WE LOOK FORWARD TO SEEING YOU</div><h2 data-en="The Wedding Venue" data-te="వివాహ వేదిక" data-hi="विवाह स्थल">The Wedding Venue</h2></div>
-        <div class="venue-card"><div class="ornament">✧ ❦ ✧</div><h3 id="venueName">Venue Name</h3><p id="venueAddress">Complete venue address</p><p id="venueDateTime">Wedding date and time</p><a class="btn" id="mapsLink" href="https://maps.google.com" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-    </section>
-
-    <section class="section rsvp" id="rsvp">
-      <div class="wrap">
-        <div class="section-head"><div class="eyebrow">KINDLY RESPOND</div><h2 data-en="Will You Join Us?" data-te="మాతో కలిసి వస్తారా?" data-hi="क्या आप हमारे साथ आएंगे?">Will You Join Us?</h2><p>Your presence will make our celebration complete.</p></div>
-        <form class="rsvp-form" id="rsvpForm">
-          <div class="field"><label for="guestName">Your name</label><input id="guestName" required placeholder="Enter your name"></div>
-          <div class="field"><label for="guestCount">Number of guests</label><input id="guestCount" type="number" min="1" max="20" value="1" required></div>
-          <div class="field"><label for="attendance">Your response</label><select id="attendance"><option>Joyfully Accept</option><option>Regretfully Decline</option></select></div>
-          <div class="field"><label for="guestMessage">Message (optional)</label><textarea id="guestMessage" placeholder="Leave us a lovely note"></textarea></div>
-          <button type="submit">Send RSVP on WhatsApp</button>
-          <p class="form-note">This form opens WhatsApp with your RSVP message ready to send. It does not store responses automatically.</p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer><div class="ornament">✧ ❦ ✧</div><div class="names" id="footerNames">Bride & Groom</div><p>WITH LOVE, TOGETHER WITH OUR FAMILIES</p><p>Made with love ♡</p></footer>
-
-  <audio id="bgMusic" loop preload="none"><source src="assets/background-music.mp3" type="audio/mpeg"></audio>
-  <button class="music-btn" id="musicBtn" type="button" aria-label="Play or pause background music" title="Play / pause music">♫</button>
-
-  <script>
-    /* =========================================================
-       PERSONALIZE THIS CONFIG BEFORE PUBLISHING YOUR WEBSITE
-       ========================================================= */
-    const CONFIG = {
-      bride: "Bride Name",
-      groom: "Groom Name",
-      // Format: YYYY-MM-DDTHH:mm:ss+05:30 (India Standard Time)
-      weddingDate: "2027-01-01T09:00:00+05:30",
-      displayDate: "JANUARY 2027",
-      city: "YOUR CITY",
-      brideBio: "Add a short introduction about the bride.",
-      groomBio: "Add a short introduction about the groom.",
-      bridePhoto: "assets/bride.jpg",
-      groomPhoto: "assets/groom.jpg",
-      venueName: "Your Wedding Venue",
-      venueAddress: "Full venue address, city, state, PIN code",
-      venueDateTime: "Wedding ceremony • Add the time",
-      mapsUrl: "https://maps.google.com/?q=YOUR+VENUE",
-      whatsappNumber: "91XXXXXXXXXX", // Country code + number, digits only
-      invitationVideo: "assets/wedding-invitation.mp4",
-      backgroundMusic: "assets/background-music.mp3",
-      events: [
-        { icon: "✧", name: "Haldi", date: "Add date", time: "Add time", place: "Add venue" },
-        { icon: "❀", name: "Mehendi", date: "Add date", time: "Add time", place: "Add venue" },
-        { icon: "♡", name: "Wedding Ceremony", date: "Add date", time: "Add time", place: "Add venue" }
-      ],
-      gallery: [
-        "assets/gallery-1.jpg", "assets/gallery-2.jpg", "assets/gallery-3.jpg",
-        "assets/gallery-4.jpg", "assets/gallery-5.jpg", "assets/gallery-6.jpg"
-      ]
-    };
-
-    const byId = id => document.getElementById(id);
-    const setText = (id, value) => { byId(id).textContent = value; };
-
-    function applyConfig() {
-      setText("brideName", CONFIG.bride);
-      setText("groomName", CONFIG.groom);
-      setText("brideCardName", CONFIG.bride);
-      setText("groomCardName", CONFIG.groom);
-      setText("brideBio", CONFIG.brideBio);
-      setText("groomBio", CONFIG.groomBio);
-      setText("heroDate", `${CONFIG.displayDate} • ${CONFIG.city}`);
-      setText("footerNames", `${CONFIG.bride} & ${CONFIG.groom}`);
-      setText("venueName", CONFIG.venueName);
-      setText("venueAddress", CONFIG.venueAddress);
-      setText("venueDateTime", CONFIG.venueDateTime);
-      byId("bridePhoto").src = CONFIG.bridePhoto;
-      byId("groomPhoto").src = CONFIG.groomPhoto;
-      byId("mapsLink").href = CONFIG.mapsUrl;
-      byId("videoSource").src = CONFIG.invitationVideo;
-      byId("inviteVideo").load();
-      byId("bgMusic").querySelector("source").src = CONFIG.backgroundMusic;
-      byId("bgMusic").load();
-
-      const events = byId("eventCards");
-      events.replaceChildren();
-      CONFIG.events.forEach(event => {
-        const card = document.createElement("article");
-        card.className = "event";
-        const icon = document.createElement("div"); icon.className = "symbol"; icon.textContent = event.icon;
-        const name = document.createElement("h3"); name.textContent = event.name;
-        card.append(icon, name);
-        [event.date, event.time, event.place].forEach(value => {
-          const p = document.createElement("p"); p.textContent = value; card.append(p);
-        });
-        events.append(card);
-      });
-
-      const grid = byId("photoGrid");
-      grid.replaceChildren();
-      CONFIG.gallery.forEach((src, index) => {
-        const img = document.createElement("img");
-        img.src = src; img.alt = `Wedding memory ${index + 1}`; img.loading = "lazy";
-        img.onerror = () => { img.style.display = "none"; };
-        grid.append(img);
-      });
-    }
-
-    function updateCountdown() {
-      const target = new Date(CONFIG.weddingDate).getTime();
-      if (Number.isNaN(target)) {
-        setText("countdownMessage", "Please enter a valid wedding date in the CONFIG section.");
-        return;
-      }
-      const remaining = target - Date.now();
-      if (remaining <= 0) {
-        ["days", "hours", "minutes", "seconds"].forEach(id => setText(id, "00"));
-        setText("countdownMessage", "Today is the beginning of forever. Wishing you a beautiful celebration!");
-        return;
-      }
-      setText("days", Math.floor(remaining / 86400000));
-      setText("hours", String(Math.floor((remaining % 86400000) / 3600000)).padStart(2, "0"));
-      setText("minutes", String(Math.floor((remaining % 3600000) / 60000)).padStart(2, "0"));
-      setText("seconds", String(Math.floor((remaining % 60000) / 1000)).padStart(2, "0"));
-    }
-
-    byId("language").addEventListener("change", event => {
-      const lang = event.target.value;
-      document.querySelectorAll(`[data-${lang}]`).forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
-      });
-      document.documentElement.lang = lang;
-    });
-
-    byId("shareBtn").addEventListener("click", async () => {
-      const shareData = {
-        title: document.title,
-        text: `Join ${CONFIG.bride} & ${CONFIG.groom} for their wedding celebration!`,
-        url: location.href
-      };
-      if (navigator.share) {
-        try { await navigator.share(shareData); } catch (error) {}
-      } else {
-        try {
-          await navigator.clipboard.writeText(location.href);
-          alert("Wedding invitation link copied!");
-        } catch (error) {
-          prompt("Copy your wedding invitation link:", location.href);
-        }
-      }
-    });
-
-    byId("musicBtn").addEventListener("click", async () => {
-      const audio = byId("bgMusic");
-      if (audio.paused) {
-        try { await audio.play(); byId("musicBtn").textContent = "Ⅱ"; }
-        catch (error) { alert("Please add your music file at assets/background-music.mp3."); }
-      } else {
-        audio.pause(); byId("musicBtn").textContent = "♫";
-      }
-    });
-
-    byId("rsvpForm").addEventListener("submit", event => {
-      event.preventDefault();
-      if (!/^\d{10,15}$/.test(CONFIG.whatsappNumber)) {
-        alert("Please replace whatsappNumber in CONFIG with your country code and WhatsApp number (digits only).");
-        return;
-      }
-      const message = [
-        "Wedding RSVP",
-        `Name: ${byId("guestName").value.trim()}`,
-        `Guests: ${byId("guestCount").value}`,
-        `Attendance: ${byId("attendance").value}`,
-        `Message: ${byId("guestMessage").value.trim()}`
-      ].join("\n");
-      window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
-    });
-
-    applyConfig();
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
-</body>
-</html>
+$("shareBtn").addEventListener("click",async()=>{const data={title:document.title,text:"Join Jedidiah & Neelima for their wedding on 16 December 2026.",url:location.href};if(navigator.share){try{await navigator.share(data)}catch(e){}}else{try{await navigator.clipboard.writeText(location.href);alert("Invitation link copied!")}catch(e){prompt("Copy this link",location.href)}}});
+$("language").addEventListener("change",e=>{const lang=e.target.value;document.querySelectorAll(`[data-${lang}]`).forEach(el=>el.textContent=el.getAttribute(`data-${lang}`));document.documentElement.lang=lang});
+$("musicBtn").addEventListener("click",async()=>{const a=$("bgMusic");if(a.paused){try{await a.play();$("musicBtn").textContent="Ⅱ"}catch(e){alert("Please add your music file as assets/background-music.mp3.")}}else{a.pause();$("musicBtn").textContent="♫"}});
+$("rsvpForm").addEventListener("submit",e=>{e.preventDefault();if(!/^\d{10,15}$/.test(CONFIG.whatsappNumber)){alert("The RSVP WhatsApp number is not configured. Please contact the hosts directly.");return}const msg=["Wedding RSVP — Jedidiah & Neelima",`Name: ${$("guestName").value}`,`Guests: ${$("guestCount").value}`,`Attendance: ${$("attendance").value}`,`Message: ${$("guestMessage").value}`].join("\n");window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`,"_blank","noopener")});
+</script>
+</body></html>
