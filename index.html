@@ -608,13 +608,6 @@ h1 small{
     background-image:url("assets/card-inside-hi-ma.jpg");
 }
 
-.cv-page{background-size:200% 100%;background-position:100% 0%;}
-
-#cardViewer.ready .cv-front{background-image:url("assets/card-cover.jpg");}
-#cardViewer.ready .cv-back{background-image:url("assets/card-inside.jpg");}
-#cardViewer.ready .cv-page{background-image:url("assets/card-inside.jpg");}
-#cardViewer.ready .cv-page{background-image:url("assets/card-inside-hi-ma.jpg");}
-
 .cv-controls{
     display:flex;
     align-items:center;
@@ -1641,15 +1634,22 @@ document.addEventListener("keydown",function(e){
     });
 
     // Clicking the card turns it; clicking the last spread opens the enlarged view
-    stage.addEventListener("click",()=>{
+    let suppressClick=false;
 
-        if(currentPage<3){
-            setPage(currentPage+1);
-        }else{
-            openBox();
-        }
+stage.addEventListener("click",()=>{
 
-    });
+    if(suppressClick){
+        suppressClick=false;
+        return;
+    }
+
+    if(currentPage<3){
+        setPage(currentPage+1);
+    }else{
+        openBox();
+    }
+
+});
 
     zoom.addEventListener("click",openBox);
 
@@ -1702,13 +1702,15 @@ document.addEventListener("keydown",function(e){
 
         if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5){
 
-            if(dx<0){
-                setPage(currentPage+1);
-            }else{
-                setPage(currentPage-1);
-            }
+    suppressClick=true;
 
-        }
+    if(dx<0){
+        setPage(currentPage+1);
+    }else{
+        setPage(currentPage-1);
+    }
+
+}
 
     },{passive:true});
 
