@@ -516,7 +516,7 @@ h1 small{
     transition:transform 1s cubic-bezier(.45,.05,.2,1);
 }
 
-.cv-page,.cv-cover{
+.cv-page,.cv-cover,.cv-leaf{
     position:absolute;
     top:0;
     left:50%;
@@ -525,11 +525,14 @@ h1 small{
 }
 
 .cv-page{
+    z-index:0;
     background:#efe6d6 center/cover no-repeat;
     box-shadow:0 8px 22px rgba(60,20,25,.20);
 }
 
+/* First turning page: the front cover */
 .cv-cover{
+    z-index:3;
     transform-origin:left center;
     transform-style:preserve-3d;
     -webkit-transform-style:preserve-3d;
@@ -537,7 +540,23 @@ h1 small{
     transition:transform 1.1s cubic-bezier(.5,.1,.2,1);
 }
 
-.cv-cover.open{transform:translateZ(1px) rotateY(-180deg);}
+.cv-cover.open{
+    transform:translateZ(1px) rotateY(-180deg);
+}
+
+/* Second turning page: turns the first inside spread to the second */
+.cv-leaf{
+    z-index:2;
+    transform-origin:left center;
+    transform-style:preserve-3d;
+    -webkit-transform-style:preserve-3d;
+    transform:translateZ(.5px) rotateY(0deg);
+    transition:transform 1.1s cubic-bezier(.5,.1,.2,1);
+}
+
+.cv-leaf.open{
+    transform:translateZ(.5px) rotateY(-180deg);
+}
 
 .cv-face{
     position:absolute;
@@ -548,10 +567,45 @@ h1 small{
     box-shadow:0 8px 22px rgba(60,20,25,.20);
 }
 
+/* Back of the cover: left side of the first inside spread */
 .cv-back{
     transform:rotateY(180deg);
     background-size:200% 100%;
     background-position:0% 0%;
+}
+
+/* Front of the second turning page: right side of the first spread */
+.cv-leaf-front{
+    background-size:200% 100%;
+    background-position:100% 0%;
+}
+
+/* Back of the second turning page: left side of the second spread */
+.cv-leaf-back{
+    transform:rotateY(180deg);
+    background-size:200% 100%;
+    background-position:0% 0%;
+}
+
+/* Final stationary page: right side of the second spread */
+.cv-page{
+    background-size:200% 100%;
+    background-position:100% 0%;
+}
+
+/* Card images */
+#cardViewer.ready .cv-front{
+    background-image:url("assets/card-cover.jpg");
+}
+
+#cardViewer.ready .cv-back,
+#cardViewer.ready .cv-leaf-front{
+    background-image:url("assets/card-inside.jpg");
+}
+
+#cardViewer.ready .cv-leaf-back,
+#cardViewer.ready .cv-page{
+    background-image:url("assets/card-inside-hi-ma.jpg");
 }
 
 .cv-page{background-size:200% 100%;background-position:100% 0%;}
@@ -559,6 +613,7 @@ h1 small{
 #cardViewer.ready .cv-front{background-image:url("assets/card-cover.jpg");}
 #cardViewer.ready .cv-back{background-image:url("assets/card-inside.jpg");}
 #cardViewer.ready .cv-page{background-image:url("assets/card-inside.jpg");}
+#cardViewer.ready .cv-page{background-image:url("assets/card-inside-hi-ma.jpg");}
 
 .cv-controls{
     display:flex;
@@ -1075,19 +1130,27 @@ window.gtranslateSettings['43217984'] = {
         <div class="cv-stage" id="cvStage">
             <div class="cv-book" id="cvBook">
 
-                <div class="cv-page" role="img" aria-label="Inside right page of the wedding card, in Telugu"></div>
+                <!-- Final stationary page: right side of the second inside spread -->
+<div class="cv-page" role="img" aria-label="Right page of the second inside spread"></div>
 
-                <div class="cv-cover" id="cvCover">
-                    <div class="cv-face cv-front" role="img" aria-label="Cover of the wedding card: the couple walking towards a church"></div>
-                    <div class="cv-face cv-back" role="img" aria-label="Inside left page of the wedding card, in English"></div>
-                </div>
+<!-- Second turning page -->
+<div class="cv-leaf" id="cvLeaf">
+    <div class="cv-face cv-leaf-front" role="img" aria-label="Right page of the first inside spread"></div>
+    <div class="cv-face cv-leaf-back" role="img" aria-label="Left page of the second inside spread"></div>
+</div>
+
+<!-- Front cover and its inside page -->
+<div class="cv-cover" id="cvCover">
+    <div class="cv-face cv-front" role="img" aria-label="Front cover of the wedding card"></div>
+    <div class="cv-face cv-back" role="img" aria-label="Left page of the first inside spread"></div>
+</div>
 
             </div>
         </div>
 
         <div class="cv-controls">
             <button class="cv-btn" id="cvPrev" type="button" aria-label="Back to the cover" disabled>&#8249;</button>
-            <div class="cv-caption" id="cvCaption" aria-live="polite">Cover · 1 of 2</div>
+            <div class="cv-caption" id="cvCaption" aria-live="polite">Cover · 1 of 3</div>
             <button class="cv-btn" id="cvNext" type="button" aria-label="Open the card">&#8250;</button>
         </div>
 
@@ -1099,7 +1162,7 @@ window.gtranslateSettings['43217984'] = {
 
     <div class="cv-lightbox" id="cvLightbox" role="dialog" aria-modal="true" aria-label="Inside of the wedding card">
         <button class="cv-close" id="cvClose" type="button" aria-label="Close">&times;</button>
-        <img src="assets/card-inside.jpg" loading="lazy" alt="Inside of the printed wedding card: English on the left page and Telugu on the right page">
+        <img src="assets/card-inside.jpg" loading="lazy" alt="Inside pages of the printed wedding card">
     </div>
 
 </div>
@@ -1471,12 +1534,24 @@ document.addEventListener("keydown",function(e){
     const viewer=$("cardViewer");
     if(!viewer)return;
 
-    const stage=$("cvStage"), book=$("cvBook"), cover=$("cvCover");
-    const prev=$("cvPrev"), next=$("cvNext"), cap=$("cvCaption");
-    const zoom=$("cvZoom"), box=$("cvLightbox"), boxClose=$("cvClose");
+    const stage=$("cvStage");
+    const book=$("cvBook");
+    const cover=$("cvCover");
+    const leaf=$("cvLeaf");
 
-    const RATIO=930/650;      // page height / page width
-    let isOpen=false;
+    const prev=$("cvPrev");
+    const next=$("cvNext");
+    const cap=$("cvCaption");
+
+    const zoom=$("cvZoom");
+    const box=$("cvLightbox");
+    const boxClose=$("cvClose");
+    const boxImg=box.querySelector("img");
+
+    const RATIO=930/650;
+
+    // 1 = Cover, 2 = First inside spread, 3 = Second inside spread
+    let currentPage=1;
 
     function layout(animate){
 
@@ -1490,15 +1565,19 @@ document.addEventListener("keydown",function(e){
         const pageW=spreadW/2;
         const pageH=pageW*RATIO;
 
-        // the closed cover is shown larger so it is easy to see on phones
+        // Keep the cover larger when it is closed
         const k=Math.max(1,Math.min(1.8,600/pageH));
 
         book.style.width=spreadW+"px";
         book.style.marginLeft=(-spreadW/2)+"px";
         book.style.marginTop=(-pageH/2)+"px";
-        book.style.setProperty("--k",isOpen?1:k);
-        book.style.setProperty("--sh",isOpen?0:-0.25*k);
-        stage.style.height=(isOpen?pageH:pageH*k)+"px";
+
+        const isInside=currentPage>1;
+
+        book.style.setProperty("--k",isInside?1:k);
+        book.style.setProperty("--sh",isInside?0:-0.25*k);
+
+        stage.style.height=(isInside?pageH:pageH*k)+"px";
 
         if(!animate){
             void stage.offsetWidth;
@@ -1507,80 +1586,158 @@ document.addEventListener("keydown",function(e){
         }
     }
 
-    function setOpen(v){
+    function setPage(page){
 
-        isOpen=v;
-        cover.classList.toggle("open",v);
-        prev.disabled=!v;
-        next.disabled=v;
-        zoom.hidden=!v;
-        cap.textContent=v?"Inside · 2 of 2":"Cover · 1 of 2";
+        currentPage=Math.max(1,Math.min(3,page));
+
+        // Turn the cover when moving to page 2 or 3
+        cover.classList.toggle("open",currentPage>=2);
+
+        // Turn the second page only when moving to page 3
+        leaf.classList.toggle("open",currentPage>=3);
+
+        prev.disabled=currentPage===1;
+        next.disabled=currentPage===3;
+
+        zoom.hidden=currentPage===1;
+
+        if(currentPage===1){
+            cap.textContent="Cover · 1 of 3";
+        }else if(currentPage===2){
+            cap.textContent="Inside · 2 of 3";
+        }else{
+            cap.textContent="Inside · 3 of 3";
+        }
+
         layout(true);
     }
 
     function openBox(){
+
+        // Show the matching inside spread in the enlarged view
+        boxImg.src=currentPage===3
+            ?"assets/card-inside-hi-ma.jpg"
+            :"assets/card-inside.jpg";
+
         box.classList.add("open");
         document.body.style.overflow="hidden";
         boxClose.focus();
     }
 
     function closeBox(){
+
         box.classList.remove("open");
         document.body.style.overflow="";
         zoom.focus();
     }
 
-    next.addEventListener("click",()=>setOpen(true));
-    prev.addEventListener("click",()=>setOpen(false));
-    stage.addEventListener("click",()=>{ isOpen?openBox():setOpen(true); });
+    // Previous and next buttons
+    next.addEventListener("click",()=>{
+        setPage(currentPage+1);
+    });
+
+    prev.addEventListener("click",()=>{
+        setPage(currentPage-1);
+    });
+
+    // Clicking the card turns it; clicking the last spread opens the enlarged view
+    stage.addEventListener("click",()=>{
+
+        if(currentPage<3){
+            setPage(currentPage+1);
+        }else{
+            openBox();
+        }
+
+    });
+
     zoom.addEventListener("click",openBox);
+
     boxClose.addEventListener("click",closeBox);
 
     box.addEventListener("click",e=>{
-        if(e.target===box)closeBox();
+        if(e.target===box){
+            closeBox();
+        }
     });
 
+    // Escape closes the enlarged view
     document.addEventListener("keydown",e=>{
-        if(e.key==="Escape" && box.classList.contains("open"))closeBox();
+
+        if(e.key==="Escape" && box.classList.contains("open")){
+            closeBox();
+        }
+
     });
 
+    // Keyboard navigation
     viewer.addEventListener("keydown",e=>{
-        if(e.key==="ArrowRight")setOpen(true);
-        if(e.key==="ArrowLeft")setOpen(false);
+
+        if(e.key==="ArrowRight"){
+            setPage(currentPage+1);
+        }
+
+        if(e.key==="ArrowLeft"){
+            setPage(currentPage-1);
+        }
+
     });
 
-    // swipe left / right on phones
+    // Swipe left or right on phones
     let sx=0,sy=0;
 
     stage.addEventListener("touchstart",e=>{
+
         sx=e.touches[0].clientX;
         sy=e.touches[0].clientY;
+
     },{passive:true});
 
     stage.addEventListener("touchend",e=>{
+
         const t=e.changedTouches[0];
-        const dx=t.clientX-sx, dy=t.clientY-sy;
+
+        const dx=t.clientX-sx;
+        const dy=t.clientY-sy;
+
         if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.5){
-            setOpen(dx<0);
+
+            if(dx<0){
+                setPage(currentPage+1);
+            }else{
+                setPage(currentPage-1);
+            }
+
         }
+
     },{passive:true});
 
-    // load the card photos only when the section is near the screen
+    // Load card photos only when the section is near the screen
     const ready=()=>viewer.classList.add("ready");
 
     if("IntersectionObserver" in window){
+
         new IntersectionObserver((entries,obs)=>{
-            if(entries[0].isIntersecting){ready();obs.disconnect();}
+
+            if(entries[0].isIntersecting){
+                ready();
+                obs.disconnect();
+            }
+
         },{rootMargin:"600px"}).observe(viewer);
+
     }else{
+
         ready();
+
     }
 
     window.addEventListener("resize",()=>layout(false));
+
+    setPage(1);
     layout(false);
 
 })();
-
 // WHATSAPP RSVP
 
 $("rsvpForm").addEventListener("submit",e=>{
