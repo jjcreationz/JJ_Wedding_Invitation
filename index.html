@@ -38,7 +38,8 @@ body{
 margin:0;
 background:var(--burgundy);
 color:var(--ivory);
-font-family:var(--serif)
+font-family:var(--serif);
+top:0!important
 }
 
 a{color:inherit}
@@ -86,24 +87,16 @@ text-transform:uppercase
 
 .navtools{
 display:flex;
-gap:8px;
-align-items:center
+gap:10px;
+align-items:center;
+flex-wrap:wrap
 }
 
-.language,button,.btn{
+button,.btn{
 font:600 10px var(--sans);
 letter-spacing:.1em;
 text-transform:uppercase
 }
-
-.language{
-background:transparent;
-color:var(--ivory);
-border:1px solid var(--line);
-padding:9px
-}
-
-.language option{color:#222}
 
 button,.btn{
 display:inline-block;
@@ -119,6 +112,99 @@ padding:12px 18px
 background:transparent;
 color:var(--gold-light)
 }
+
+/* GTRANSLATE WIDGET */
+
+.translator-bar{
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:38px;
+padding:4px 8px;
+border:1px solid var(--line);
+background:rgba(255,255,255,.04);
+border-radius:3px
+}
+
+#gt-mordadam-43217984{
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:var(--sans);
+font-size:11px
+}
+
+#gt-mordadam-43217984 .gt-current-lang{
+display:flex!important;
+align-items:center;
+gap:7px;
+padding:5px 8px;
+color:var(--gold-light)!important;
+background:transparent!important;
+border:0!important;
+font:600 10px var(--sans)!important;
+text-decoration:none!important;
+cursor:pointer
+}
+
+#gt-mordadam-43217984 .gt-current-lang:hover{
+color:#fff!important
+}
+
+#gt-mordadam-43217984 .gt-current-lang img{
+width:24px!important;
+height:auto!important;
+border-radius:2px
+}
+
+#gt-mordadam-43217984 .gt_options{
+z-index:9999!important;
+background:#2a060c!important;
+border:1px solid var(--gold)!important;
+box-shadow:0 8px 25px rgba(0,0,0,.35)!important;
+max-height:300px;
+overflow-y:auto
+}
+
+#gt-mordadam-43217984 .gt_options a{
+display:flex!important;
+align-items:center;
+gap:8px;
+padding:9px 12px!important;
+color:#f5ebdd!important;
+font:11px var(--sans)!important;
+text-decoration:none!important
+}
+
+#gt-mordadam-43217984 .gt_options a:hover{
+background:#681b29!important;
+color:var(--gold-light)!important
+}
+
+#gt-mordadam-43217984 .gt_options img{
+width:20px!important;
+height:auto!important
+}
+
+/* Hide Google translation banner */
+
+.goog-te-banner-frame{
+display:none!important
+}
+
+.goog-te-gadget{
+font-size:0!important
+}
+
+iframe.goog-te-menu-frame{
+max-width:100%!important
+}
+
+.skiptranslate{
+/* Do not hide the GTranslate widget itself */
+}
+
+/* HERO */
 
 .hero{
 min-height:690px;
@@ -144,6 +230,7 @@ pointer-events:none
 }
 
 .hero:before{top:-20px;left:-25px}
+
 .hero:after{
 right:-25px;
 bottom:-20px;
@@ -434,37 +521,6 @@ padding:0;
 font-size:18px
 }
 
-/* GOOGLE TRANSLATE: HIDE ITS DEFAULT UI */
-
-#google_translate_element{
-position:absolute;
-left:-10000px;
-top:0;
-width:1px;
-height:1px;
-overflow:hidden
-}
-
-.goog-te-banner-frame{
-display:none!important
-}
-
-.goog-te-gadget{
-font-size:0!important
-}
-
-body{
-top:0!important
-}
-
-.skiptranslate{
-display:none!important
-}
-
-iframe.goog-te-menu-frame{
-max-width:100%!important
-}
-
 /* RESPONSIVE DESIGN */
 
 @media(max-width:800px){
@@ -481,7 +537,10 @@ flex-wrap:nowrap;
 padding:8px 0
 }
 
-.navtools{margin-left:auto}
+.navtools{
+margin-left:auto;
+justify-content:center
+}
 }
 
 @media(max-width:600px){
@@ -499,8 +558,30 @@ grid-template-columns:1fr
 .countbox{padding:14px 3px}
 
 .section{padding:62px 15px}
+
+.navtools{
+width:100%;
+justify-content:center
+}
 }
 </style>
+
+<!-- GTRANSLATE SETTINGS -->
+<script>
+window.gtranslateSettings = window.gtranslateSettings || {};
+
+window.gtranslateSettings['43217984'] = {
+default_language: "en",
+languages: ["en", "te", "hi"],
+wrapper_selector: "#gt-mordadam-43217984",
+native_language_names: 1,
+flag_style: "2d",
+flag_size: 24,
+horizontal_position: "inline",
+flags_location: "https://jedidiahjskjournal.github.io/flags/"
+};
+</script>
+
 </head>
 
 <body>
@@ -520,11 +601,10 @@ grid-template-columns:1fr
 
 <div class="navtools">
 
-<select class="language" id="language" aria-label="Choose language">
-<option value="en">English</option>
-<option value="te">తెలుగు</option>
-<option value="hi">हिन्दी</option>
-</select>
+<!-- GTRANSLATE WIDGET -->
+<div class="translator-bar">
+<div id="gt-mordadam-43217984"></div>
+</div>
 
 <button class="outline" id="shareBtn" type="button">
 Share
@@ -533,9 +613,6 @@ Share
 </div>
 </nav>
 </header>
-
-<!-- GOOGLE TRANSLATE ELEMENT -->
-<div id="google_translate_element"></div>
 
 <main>
 
@@ -873,66 +950,6 @@ setInterval(tick,1000);
 
 
 // ======================================
-// FULL PAGE LANGUAGE TRANSLATION
-// ======================================
-
-// Google Translate initialization
-
-function googleTranslateElementInit(){
-
-new google.translate.TranslateElement({
-
-pageLanguage: "en",
-
-includedLanguages: "en,te,hi",
-
-autoDisplay: false
-
-}, "google_translate_element");
-
-}
-
-
-// Change language using the custom dropdown
-
-function changeLanguage(lang){
-
-const translateSelect = document.querySelector(".goog-te-combo");
-
-if(!translateSelect){
-
-// Wait until Google Translate has loaded
-
-setTimeout(() => changeLanguage(lang), 500);
-
-return;
-}
-
-// English resets the page to its original language
-
-translateSelect.value = lang === "en" ? "" : lang;
-
-// Trigger Google translation
-
-translateSelect.dispatchEvent(
-new Event("change", {bubbles:true})
-);
-
-document.documentElement.lang = lang;
-
-}
-
-
-// Custom language dropdown
-
-$("language").addEventListener("change",function(){
-
-changeLanguage(this.value);
-
-});
-
-
-// ======================================
 // SHARE INVITATION
 // ======================================
 
@@ -1052,9 +1069,12 @@ window.open(
 
 </script>
 
-<!-- GOOGLE TRANSLATE SCRIPT -->
-
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- GTRANSLATE SCRIPT -->
+<script
+src="https://jedidiahjskjournal.github.io/js/gt.min.js"
+data-gt-widget-id="43217984"
+defer>
+</script>
 
 </body>
 </html>
