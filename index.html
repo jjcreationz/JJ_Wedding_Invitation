@@ -1325,7 +1325,7 @@ window.gtranslateSettings['43217984'] = {
 
 <!-- BACKGROUND MUSIC -->
 
-<audio id="bgMusic" loop preload="none">
+<audio id="bgMusic" loop preload="auto">
     <source src="assets/background-music.mp3" type="audio/mpeg">
 </audio>
 
@@ -1433,37 +1433,85 @@ window.addEventListener("hashchange",()=>{
     history.replaceState(null,"",cleanPath());
 });
 
+
 // BACKGROUND MUSIC
 
-$("musicBtn").addEventListener("click",async()=>{
+const audio = $("bgMusic");
+const musicButton = $("musicBtn");
 
-    const audio=$("bgMusic");
-    const button=$("musicBtn");
+// Update the music button appearance
+function updateMusicButton() {
 
-    if(audio.paused){
+    if (audio.paused) {
+        musicButton.textContent = "♫";
+        musicButton.setAttribute("aria-pressed", "false");
+        musicButton.setAttribute("aria-label", "Play background music");
+    } else {
+        musicButton.textContent = "Ⅱ";
+        musicButton.setAttribute("aria-pressed", "true");
+        musicButton.setAttribute("aria-label", "Pause background music");
+    }
 
-        try{
+}
+
+// Attempt automatic playback when the page opens
+async function startBackgroundMusic() {
+
+    try {
+
+        await audio.play();
+
+        updateMusicButton();
+
+    } catch (error) {
+
+        // Browser blocked autoplay.
+        // The visitor can start music using the music button.
+
+        updateMusicButton();
+
+    }
+
+}
+
+// Play or pause using the music button
+musicButton.addEventListener("click", async () => {
+
+    if (audio.paused) {
+
+        try {
             await audio.play();
-            button.textContent="Ⅱ";
-            button.setAttribute("aria-pressed","true");
-        }catch(e){
-            alert("Please add your music file as assets/background-music.mp3.");
+        } catch (error) {
+            console.log("Music playback could not start:", error);
         }
 
-    }else{
+    } else {
 
         audio.pause();
-        button.textContent="♫";
-        button.setAttribute("aria-pressed","false");
+
     }
+
+    updateMusicButton();
+
 });
 
-// RESET MUSIC BUTTON
+// Keep button synchronised with audio
+audio.addEventListener("play", updateMusicButton);
+audio.addEventListener("pause", updateMusicButton);
 
-$("bgMusic").addEventListener("pause",()=>{
-    $("musicBtn").textContent="♫";
-    $("musicBtn").setAttribute("aria-pressed","false");
-});
+// Start attempting autoplay when the page loads
+if (document.readyState === "loading") {
+
+    document.addEventListener("DOMContentLoaded", startBackgroundMusic, {
+        once: true
+    });
+
+} else {
+
+    startBackgroundMusic();
+
+}
+
 
 // TRANSLATOR CLOSE FUNCTION
 
