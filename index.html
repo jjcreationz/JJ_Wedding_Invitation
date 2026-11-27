@@ -546,14 +546,15 @@ h1 small{
 
 /* Second turning page */
 .cv-leaf{
-    z-index:4;
+    z-index:2;
     transform-origin:left center;
     transform-style:preserve-3d;
     -webkit-transform-style:preserve-3d;
-    transform:translateZ(2px) rotateY(0deg);
+    transform:translateZ(.5px) rotateY(0deg);
     transition:transform 1.1s cubic-bezier(.5,.1,.2,1);
 }
 
+/* Bring it forward only after the second flip */
 .cv-leaf.open{
     z-index:4;
     transform:translateZ(2px) rotateY(-180deg);
