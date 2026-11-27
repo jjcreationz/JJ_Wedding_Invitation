@@ -8,7 +8,11 @@
 <meta name="description" content="Jedidiah and Neelima invite you to celebrate their wedding on 16 December 2026 in Sanathnagar, Hyderabad.">
 <meta property="og:title" content="Jedidiah & Neelima | Wedding Invitation">
 <meta property="og:description" content="Wednesday, 16 December 2026 at 10:00 AM · Baptist Church Sanathnagar, Hyderabad">
+
 <title>Jedidiah & Neelima | Wedding Invitation</title>
+
+<!-- WEDDING FAVICON -->
+<link rel="icon" type="image/png" href="assets/wedding-favicon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -158,22 +162,33 @@ border-radius:2px
 }
 
 #gt-mordadam-43217984 .gt_options{
-z-index:9999!important;
+z-index:99999!important;
 background:#2a060c!important;
 border:1px solid var(--gold)!important;
-box-shadow:0 8px 25px rgba(0,0,0,.35)!important;
-max-height:300px;
-overflow-y:auto
+box-shadow:0 15px 50px rgba(0,0,0,.65)!important;
+
+position:fixed!important;
+top:50%!important;
+left:50%!important;
+right:auto!important;
+bottom:auto!important;
+transform:translate(-50%,-50%)!important;
+
+width:min(90vw,380px)!important;
+max-height:75vh!important;
+overflow-y:auto!important;
+border-radius:6px!important;
 }
 
 #gt-mordadam-43217984 .gt_options a{
 display:flex!important;
 align-items:center;
 gap:8px;
-padding:9px 12px!important;
+padding:12px 16px!important;
 color:#f5ebdd!important;
 font:11px var(--sans)!important;
-text-decoration:none!important
+text-decoration:none!important;
+border-bottom:1px solid rgba(197,163,101,.12)
 }
 
 #gt-mordadam-43217984 .gt_options a:hover{
@@ -509,11 +524,14 @@ color:#cbb9a5;
 letter-spacing:.08em
 }
 
+/* MUSIC BUTTON - TOP RIGHT */
+
 .music{
 position:fixed;
 right:18px;
-bottom:18px;
-z-index:30;
+top:18px;
+bottom:auto;
+z-index:999;
 border-radius:50%;
 width:48px;
 height:48px;
@@ -564,15 +582,31 @@ width:100%;
 justify-content:center
 }
 }
+
 </style>
 
 <!-- GTRANSLATE SETTINGS -->
+
 <script>
 window.gtranslateSettings = window.gtranslateSettings || {};
 
 window.gtranslateSettings['43217984'] = {
 default_language: "en",
-languages: ["en", "te", "hi"],
+
+languages: [
+"en", "te", "hi", "es", "zh-CN", "ar", "fr", "de", "pt", "ru",
+"ja", "ko", "it", "ta", "kn", "ml", "bn", "mr", "gu", "pa", "ur",
+"af", "sq", "am", "fa", "ps", "hy", "az", "eu", "be", "bs", "bg",
+"ca", "ceb", "ny", "zh-TW", "co", "hr", "cs", "da", "nl", "eo",
+"et", "tl", "fi", "fy", "gl", "ka", "el", "ht", "ha", "haw",
+"iw", "hmn", "hu", "is", "ig", "id", "ga", "jw", "kk", "km",
+"ku", "ky", "lo", "la", "lv", "lt", "lb", "mk", "mg", "ms",
+"mt", "mi", "mn", "my", "ne", "no", "pl", "ro", "sm", "gd",
+"sr", "st", "sn", "sd", "si", "sk", "sl", "so", "su", "sw",
+"sv", "tg", "th", "tr", "uk", "uz", "vi", "cy", "xh", "yi",
+"yo", "zu"
+],
+
 wrapper_selector: "#gt-mordadam-43217984",
 native_language_names: 1,
 flag_style: "2d",
@@ -1070,6 +1104,7 @@ window.open(
 </script>
 
 <!-- GTRANSLATE SCRIPT -->
+
 <script
 src="https://jedidiahjskjournal.github.io/js/gt.min.js"
 data-gt-widget-id="43217984"
