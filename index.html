@@ -19,918 +19,1406 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* ======================================
+   GLOBAL VARIABLES
+====================================== */
+
 :root{
---burgundy:#3b080f;
---wine:#681b29;
---gold:#c5a365;
---gold-light:#e4c98f;
---ivory:#f5ebdd;
---ink:#2b1718;
---line:rgba(197,163,101,.42);
---serif:"Cormorant Garamond",Georgia,serif;
---sans:"Montserrat",Arial,sans-serif
+    --burgundy:#3b080f;
+    --wine:#681b29;
+    --gold:#c5a365;
+    --gold-light:#e4c98f;
+    --ivory:#f5ebdd;
+    --ink:#2b1718;
+    --line:rgba(197,163,101,.42);
+
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Montserrat",Arial,sans-serif;
 }
 
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 html{
-scroll-behavior:smooth;
-scroll-padding-top:80px
+    scroll-behavior:smooth;
+    scroll-padding-top:80px;
 }
 
 body{
-margin:0;
-background:var(--burgundy);
-color:var(--ivory);
-font-family:var(--serif);
-top:0!important
+    margin:0;
+    background:var(--burgundy);
+    color:var(--ivory);
+    font-family:var(--serif);
+    top:0!important;
 }
 
-a{color:inherit}
+a{
+    color:inherit;
+}
+
+/* ======================================
+   NAVIGATION BAR
+====================================== */
 
 .topbar{
-position:sticky;
-top:0;
-z-index:20;
-background:rgba(39,5,10,.96);
-border-bottom:1px solid var(--line);
-backdrop-filter:blur(10px)
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(39,5,10,.96);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(10px);
 }
 
 .nav{
-max-width:1150px;
-margin:auto;
-padding:12px 20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:16px
+    max-width:1150px;
+    margin:auto;
+    padding:12px 20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
 }
 
 .brand{
-color:var(--gold-light);
-font:600 11px var(--sans);
-letter-spacing:.2em
+    color:var(--gold-light);
+    font:600 11px var(--sans);
+    letter-spacing:.2em;
+    white-space:nowrap;
 }
 
 .navlinks{
-display:flex;
-gap:18px;
-flex-wrap:wrap
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
 }
 
 .navlinks a{
-text-decoration:none;
-color:#eadac3;
-font:500 10px var(--sans);
-letter-spacing:.1em;
-text-transform:uppercase
+    text-decoration:none;
+    color:#eadac3;
+    font:500 10px var(--sans);
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    white-space:nowrap;
 }
 
-.navlinks a:hover{color:var(--gold-light)}
+.navlinks a:hover{
+    color:var(--gold-light);
+}
+
+/* NAVIGATION TOOLS */
 
 .navtools{
-display:flex;
-gap:10px;
-align-items:center;
-flex-wrap:wrap
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    flex-shrink:0;
 }
 
 button,.btn{
-font:600 10px var(--sans);
-letter-spacing:.1em;
-text-transform:uppercase
+    font:600 10px var(--sans);
+    letter-spacing:.1em;
+    text-transform:uppercase;
 }
 
 button,.btn{
-display:inline-block;
-cursor:pointer;
-text-decoration:none;
-border:1px solid var(--gold);
-background:var(--gold);
-color:#2b1113;
-padding:12px 18px
+    display:inline-block;
+    cursor:pointer;
+    text-decoration:none;
+    border:1px solid var(--gold);
+    background:var(--gold);
+    color:#2b1113;
+    padding:12px 18px;
 }
 
 .outline{
-background:transparent;
-color:var(--gold-light)
+    background:transparent;
+    color:var(--gold-light);
 }
 
-/* GTRANSLATE WIDGET */
+/* ======================================
+   TRANSLATOR WIDGET
+====================================== */
 
 .translator-bar{
-display:flex;
-align-items:center;
-justify-content:center;
-min-height:38px;
-padding:4px 8px;
-border:1px solid var(--line);
-background:rgba(255,255,255,.04);
-border-radius:3px
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    min-height:38px;
+    padding:4px 8px;
+
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.04);
+    border-radius:3px;
 }
 
 #gt-mordadam-43217984{
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:var(--sans);
-font-size:11px
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-family:var(--sans);
+    font-size:11px;
 }
 
 #gt-mordadam-43217984 .gt-current-lang{
-display:flex!important;
-align-items:center;
-gap:7px;
-padding:5px 8px;
-color:var(--gold-light)!important;
-background:transparent!important;
-border:0!important;
-font:600 10px var(--sans)!important;
-text-decoration:none!important;
-cursor:pointer
+    display:flex!important;
+    align-items:center;
+    gap:7px;
+
+    padding:5px 8px;
+
+    color:var(--gold-light)!important;
+    background:transparent!important;
+    border:0!important;
+
+    font:600 10px var(--sans)!important;
+    text-decoration:none!important;
+
+    cursor:pointer;
 }
 
 #gt-mordadam-43217984 .gt-current-lang:hover{
-color:#fff!important
+    color:#fff!important;
 }
 
 #gt-mordadam-43217984 .gt-current-lang img{
-width:24px!important;
-height:auto!important;
-border-radius:2px
+    width:24px!important;
+    height:auto!important;
+    border-radius:2px;
 }
 
+/* CENTRED LANGUAGE POPUP */
+
 #gt-mordadam-43217984 .gt_options{
-z-index:99999!important;
-background:#2a060c!important;
-border:1px solid var(--gold)!important;
-box-shadow:0 15px 50px rgba(0,0,0,.65)!important;
+    position:fixed!important;
 
-position:fixed!important;
-top:50%!important;
-left:50%!important;
-right:auto!important;
-bottom:auto!important;
-transform:translate(-50%,-50%)!important;
+    top:50%!important;
+    left:50%!important;
+    right:auto!important;
+    bottom:auto!important;
 
-width:min(90vw,380px)!important;
-max-height:75vh!important;
-overflow-y:auto!important;
-border-radius:6px!important;
+    transform:translate(-50%,-50%)!important;
+
+    z-index:99999!important;
+
+    width:min(90vw,380px)!important;
+    max-height:75vh!important;
+
+    overflow-y:auto!important;
+
+    background:#2a060c!important;
+    border:1px solid var(--gold)!important;
+
+    box-shadow:0 15px 50px rgba(0,0,0,.65)!important;
+
+    border-radius:6px!important;
 }
 
 #gt-mordadam-43217984 .gt_options a{
-display:flex!important;
-align-items:center;
-gap:8px;
-padding:12px 16px!important;
-color:#f5ebdd!important;
-font:11px var(--sans)!important;
-text-decoration:none!important;
-border-bottom:1px solid rgba(197,163,101,.12)
+    display:flex!important;
+    align-items:center;
+    gap:8px;
+
+    padding:12px 16px!important;
+
+    color:#f5ebdd!important;
+    font:11px var(--sans)!important;
+
+    text-decoration:none!important;
+
+    border-bottom:1px solid rgba(197,163,101,.12);
 }
 
 #gt-mordadam-43217984 .gt_options a:hover{
-background:#681b29!important;
-color:var(--gold-light)!important
+    background:#681b29!important;
+    color:var(--gold-light)!important;
 }
 
 #gt-mordadam-43217984 .gt_options img{
-width:20px!important;
-height:auto!important
+    width:20px!important;
+    height:auto!important;
 }
 
-/* Hide Google translation banner */
+/* GOOGLE TRANSLATION BANNER */
 
 .goog-te-banner-frame{
-display:none!important
+    display:none!important;
 }
 
 .goog-te-gadget{
-font-size:0!important
+    font-size:0!important;
 }
 
 iframe.goog-te-menu-frame{
-max-width:100%!important
+    max-width:100%!important;
 }
 
 .skiptranslate{
-/* Do not hide the GTranslate widget itself */
+    /* Preserve the translator widget */
 }
 
-/* HERO */
+/* ======================================
+   MUSIC BUTTON
+   POSITIONED BESIDE SHARE
+====================================== */
+
+.music{
+    position:relative;
+    top:auto;
+    right:auto;
+    bottom:auto;
+
+    z-index:25;
+
+    display:grid;
+    place-items:center;
+
+    flex:0 0 42px;
+
+    width:42px;
+    height:42px;
+
+    padding:0;
+
+    border-radius:50%;
+    border:1px solid var(--gold);
+
+    background:var(--gold);
+    color:#2b1113;
+
+    font-size:18px;
+    cursor:pointer;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+}
+
+.music:hover{
+    background:var(--gold-light);
+    transform:scale(1.05);
+}
+
+/* ======================================
+   HERO SECTION
+====================================== */
 
 .hero{
-min-height:690px;
-display:grid;
-place-items:center;
-text-align:center;
-padding:90px 20px;
-background:
-radial-gradient(ellipse at center,rgba(123,35,48,.6),transparent 58%),
-linear-gradient(145deg,#26050a,#4a0c16 52%,#26050a);
-position:relative;
-overflow:hidden
+    min-height:690px;
+
+    display:grid;
+    place-items:center;
+
+    text-align:center;
+    padding:90px 20px;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(123,35,48,.6),
+            transparent 58%
+        ),
+        linear-gradient(
+            145deg,
+            #26050a,
+            #4a0c16 52%,
+            #26050a
+        );
+
+    position:relative;
+    overflow:hidden;
 }
 
-.hero:before,.hero:after{
-content:"";
-position:absolute;
-width:min(32vw,340px);
-height:min(32vw,340px);
-background:url("assets/floral-corner.png") center/contain no-repeat;
-opacity:.7;
-pointer-events:none
+.hero:before,
+.hero:after{
+    content:"";
+
+    position:absolute;
+
+    width:min(32vw,340px);
+    height:min(32vw,340px);
+
+    background:url("assets/floral-corner.png")
+        center/contain no-repeat;
+
+    opacity:.7;
+    pointer-events:none;
 }
 
-.hero:before{top:-20px;left:-25px}
+.hero:before{
+    top:-20px;
+    left:-25px;
+}
 
 .hero:after{
-right:-25px;
-bottom:-20px;
-transform:rotate(180deg)
+    right:-25px;
+    bottom:-20px;
+    transform:rotate(180deg);
 }
 
 .hero-inner{
-max-width:850px;
-position:relative;
-z-index:1
+    max-width:850px;
+    position:relative;
+    z-index:1;
 }
 
 .eyebrow{
-color:var(--gold-light);
-font:500 10px var(--sans);
-letter-spacing:.28em;
-text-transform:uppercase
+    color:var(--gold-light);
+    font:500 10px var(--sans);
+    letter-spacing:.28em;
+    text-transform:uppercase;
 }
 
 .ornament{
-color:var(--gold);
-margin:22px auto;
-font-size:24px
+    color:var(--gold);
+    margin:22px auto;
+    font-size:24px;
 }
 
 h1{
-margin:14px 0;
-color:var(--gold-light);
-font:400 clamp(56px,9vw,105px)/.9 var(--serif)
+    margin:14px 0;
+
+    color:var(--gold-light);
+
+    font:400 clamp(56px,9vw,105px)/.9 var(--serif);
 }
 
 h1 small{
-display:block;
-color:var(--ivory);
-font-style:italic;
-font-size:.48em;
-line-height:1.4
+    display:block;
+
+    color:var(--ivory);
+
+    font-style:italic;
+    font-size:.48em;
+    line-height:1.4;
 }
 
 .hero-sub{
-font-size:clamp(17px,2.3vw,23px);
-line-height:1.6;
-color:#f1e4d4
+    font-size:clamp(17px,2.3vw,23px);
+    line-height:1.6;
+    color:#f1e4d4;
 }
 
 .hero-date{
-margin:28px 0;
-color:var(--gold-light);
-font:500 12px var(--sans);
-letter-spacing:.18em
+    margin:28px 0;
+
+    color:var(--gold-light);
+
+    font:500 12px var(--sans);
+    letter-spacing:.18em;
 }
 
 .actions{
-display:flex;
-justify-content:center;
-gap:12px;
-flex-wrap:wrap
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
-.section{padding:78px 20px}
+/* ======================================
+   GENERAL SECTIONS
+====================================== */
+
+.section{
+    padding:78px 20px;
+}
 
 .wrap{
-max-width:1050px;
-margin:auto
+    max-width:1050px;
+    margin:auto;
 }
 
-.dark{background:#2a060c}
+.dark{
+    background:#2a060c;
+}
 
 .light{
-background:var(--ivory);
-color:var(--ink)
+    background:var(--ivory);
+    color:var(--ink);
 }
 
 .head{
-text-align:center;
-max-width:740px;
-margin:0 auto 38px
+    text-align:center;
+    max-width:740px;
+    margin:0 auto 38px;
 }
 
 .head h2{
-font:400 clamp(38px,6vw,58px)/1 var(--serif);
-color:var(--gold-light);
-margin:12px 0
+    font:400 clamp(38px,6vw,58px)/1 var(--serif);
+    color:var(--gold-light);
+    margin:12px 0;
 }
 
-.light .head h2{color:#5a1721}
+.light .head h2{
+    color:#5a1721;
+}
 
 .head p{
-font:12px/1.9 var(--sans);
-color:#d2c0ae
+    font:12px/1.9 var(--sans);
+    color:#d2c0ae;
 }
 
-.light .head p{color:#725d55}
+.light .head p{
+    color:#725d55;
+}
+
+/* ======================================
+   COUNTDOWN
+====================================== */
 
 .countdown{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-max-width:680px;
-margin:30px auto
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+
+    max-width:680px;
+    margin:30px auto;
 }
 
 .countbox{
-text-align:center;
-padding:20px 8px;
-border:1px solid var(--line)
+    text-align:center;
+    padding:20px 8px;
+    border:1px solid var(--line);
 }
 
 .countbox strong{
-display:block;
-color:var(--gold-light);
-font:400 clamp(32px,5vw,48px) var(--serif)
+    display:block;
+
+    color:var(--gold-light);
+
+    font:400 clamp(32px,5vw,48px) var(--serif);
 }
 
 .countbox span{
-font:9px var(--sans);
-letter-spacing:.14em;
-color:#cbb9a5;
-text-transform:uppercase
+    font:9px var(--sans);
+    letter-spacing:.14em;
+    color:#cbb9a5;
+    text-transform:uppercase;
 }
+
+/* ======================================
+   INVITATION
+====================================== */
 
 .invite-copy{
-max-width:800px;
-margin:auto;
-text-align:center;
-font-size:20px;
-line-height:1.75
+    max-width:800px;
+    margin:auto;
+
+    text-align:center;
+
+    font-size:20px;
+    line-height:1.75;
 }
 
-.invite-copy strong{color:#6b2430}
+.invite-copy strong{
+    color:#6b2430;
+}
+
+/* ======================================
+   DETAILS
+====================================== */
 
 .detail-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:16px;
-margin-top:28px
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:28px;
 }
 
 .detail{
-padding:25px;
-border:1px solid var(--line);
-text-align:center;
-background:rgba(255,255,255,.025)
+    padding:25px;
+
+    border:1px solid var(--line);
+    text-align:center;
+
+    background:rgba(255,255,255,.025);
 }
 
 .detail h3{
-font:400 28px var(--serif);
-color:var(--gold-light);
-margin:8px
+    font:400 28px var(--serif);
+    color:var(--gold-light);
+    margin:8px;
 }
 
 .detail p{
-font:11px/1.9 var(--sans);
-color:#d1bdab;
-margin:4px
+    font:11px/1.9 var(--sans);
+    color:#d1bdab;
+    margin:4px;
 }
 
+/* ======================================
+   WEDDING EVENTS
+====================================== */
+
 .events{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:16px
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
 }
 
 .event{
-padding:26px 20px;
-text-align:center;
-border:1px solid var(--line)
+    padding:26px 20px;
+
+    text-align:center;
+    border:1px solid var(--line);
 }
 
 .event h3{
-font:400 29px var(--serif);
-color:var(--gold-light);
-margin:10px
+    font:400 29px var(--serif);
+    color:var(--gold-light);
+    margin:10px;
 }
 
 .event p{
-font:11px/1.9 var(--sans);
-color:#d1bdab;
-margin:4px
+    font:11px/1.9 var(--sans);
+    color:#d1bdab;
+    margin:4px;
 }
 
+/* ======================================
+   VIDEO
+====================================== */
+
 .video-frame{
-max-width:820px;
-margin:auto;
-padding:9px;
-border:1px solid var(--gold);
-background:#180408
+    max-width:820px;
+    margin:auto;
+
+    padding:9px;
+
+    border:1px solid var(--gold);
+    background:#180408;
 }
 
 video{
-display:block;
-width:100%;
-max-height:470px;
-background:#100306
+    display:block;
+    width:100%;
+    max-height:470px;
+    background:#100306;
 }
 
+/* ======================================
+   VENUE
+====================================== */
+
 .venue{
-text-align:center;
-max-width:760px;
-margin:auto;
-padding:35px 24px;
-border:1px solid var(--line)
+    text-align:center;
+
+    max-width:760px;
+    margin:auto;
+
+    padding:35px 24px;
+
+    border:1px solid var(--line);
 }
 
 .venue h3{
-font:400 36px var(--serif);
-color:var(--gold-light);
-margin:10px
+    font:400 36px var(--serif);
+    color:var(--gold-light);
+    margin:10px;
 }
 
 .venue p{
-font:12px/1.9 var(--sans);
-color:#d1bdab
+    font:12px/1.9 var(--sans);
+    color:#d1bdab;
 }
 
 .pastors{
-font:12px/2 var(--sans);
-color:#d1bdab
+    font:12px/2 var(--sans);
+    color:#d1bdab;
 }
 
+/* ======================================
+   RSVP
+====================================== */
+
 .rsvp{
-background:linear-gradient(145deg,#4b101b,#27060b)
+    background:linear-gradient(145deg,#4b101b,#27060b);
 }
 
 .rsvp-form{
-max-width:620px;
-margin:auto;
-padding:28px;
-background:#f8f0e5;
-color:#2d1b19;
-border:1px solid var(--gold)
+    max-width:620px;
+    margin:auto;
+
+    padding:28px;
+
+    background:#f8f0e5;
+    color:#2d1b19;
+
+    border:1px solid var(--gold);
 }
 
-.field{margin:14px 0}
+.field{
+    margin:14px 0;
+}
 
 label{
-display:block;
-font:600 9px var(--sans);
-color:#654a3f;
-letter-spacing:.12em;
-text-transform:uppercase;
-margin-bottom:7px
+    display:block;
+
+    font:600 9px var(--sans);
+    color:#654a3f;
+
+    letter-spacing:.12em;
+    text-transform:uppercase;
+
+    margin-bottom:7px;
 }
 
-input,textarea,form select{
-width:100%;
-padding:12px;
-border:1px solid #d8c6ac;
-background:#fffdf8;
-color:#2d1b19;
-font:12px var(--sans)
+input,
+textarea,
+form select{
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #d8c6ac;
+    background:#fffdf8;
+    color:#2d1b19;
+
+    font:12px var(--sans);
 }
 
-textarea{min-height:80px}
+textarea{
+    min-height:80px;
+}
 
 .form-note{
-font:10px/1.7 var(--sans);
-color:#7b685c
+    font:10px/1.7 var(--sans);
+    color:#7b685c;
 }
 
+/* ======================================
+   FOOTER
+====================================== */
+
 footer{
-text-align:center;
-padding:45px 20px;
-background:#210409;
-border-top:1px solid var(--line)
+    text-align:center;
+
+    padding:45px 20px;
+
+    background:#210409;
+
+    border-top:1px solid var(--line);
 }
 
 footer .names{
-font:400 40px var(--serif);
-color:var(--gold-light)
+    font:400 40px var(--serif);
+    color:var(--gold-light);
 }
 
 footer p{
-font:10px var(--sans);
-color:#cbb9a5;
-letter-spacing:.08em
+    font:10px var(--sans);
+    color:#cbb9a5;
+    letter-spacing:.08em;
 }
 
-/* MUSIC BUTTON - TOP RIGHT */
+/* ======================================
+   RESPONSIVE NAVIGATION
+====================================== */
 
-.music{
-position:fixed;
-right:18px;
-top:18px;
-bottom:auto;
-z-index:999;
-border-radius:50%;
-width:48px;
-height:48px;
-padding:0;
-font-size:18px
+@media(max-width:1050px){
+
+    .nav{
+        flex-wrap:wrap;
+        justify-content:space-between;
+    }
+
+    .navlinks{
+        order:3;
+        width:100%;
+        justify-content:center;
+    }
+
 }
-
-/* RESPONSIVE DESIGN */
 
 @media(max-width:800px){
-.nav{
-flex-wrap:wrap;
-justify-content:center
-}
 
-.navlinks{
-order:3;
-width:100%;
-overflow:auto;
-flex-wrap:nowrap;
-padding:8px 0
-}
+    .nav{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:12px;
+    }
 
-.navtools{
-margin-left:auto;
-justify-content:center
-}
+    .brand{
+        text-align:center;
+    }
+
+    .navlinks{
+        order:3;
+        width:100%;
+
+        overflow-x:auto;
+        overflow-y:hidden;
+
+        flex-wrap:nowrap;
+        justify-content:flex-start;
+
+        padding:8px 0;
+    }
+
+    .navtools{
+        margin-left:auto;
+        justify-content:center;
+    }
+
 }
 
 @media(max-width:600px){
-.hero{
-min-height:650px;
-padding:80px 18px
+
+    .hero{
+        min-height:650px;
+        padding:80px 18px;
+    }
+
+    .detail-grid,
+    .events{
+        grid-template-columns:1fr;
+    }
+
+    .countdown{
+        gap:6px;
+    }
+
+    .countbox{
+        padding:14px 3px;
+    }
+
+    .section{
+        padding:62px 15px;
+    }
+
+    .nav{
+        padding:10px 12px;
+        gap:10px;
+    }
+
+    .navtools{
+        width:100%;
+        justify-content:center;
+        gap:8px;
+    }
+
+    .translator-bar{
+        min-height:38px;
+    }
+
+    .music{
+        flex:0 0 42px;
+        width:42px;
+        height:42px;
+    }
+
+    .hero:before,
+    .hero:after{
+        width:200px;
+        height:200px;
+    }
+
 }
 
-.detail-grid,.events{
-grid-template-columns:1fr
-}
+@media(max-width:360px){
 
-.countdown{gap:6px}
+    .navtools{
+        gap:5px;
+    }
 
-.countbox{padding:14px 3px}
+    .translator-bar{
+        padding:3px;
+    }
 
-.section{padding:62px 15px}
+    #gt-mordadam-43217984 .gt-current-lang{
+        gap:4px;
+        padding:5px;
+    }
 
-.navtools{
-width:100%;
-justify-content:center
-}
+    .navlinks{
+        gap:13px;
+    }
+
 }
 
 </style>
 
-<!-- GTRANSLATE SETTINGS -->
+<!-- ======================================
+     GTRANSLATE SETTINGS
+====================================== -->
 
 <script>
+
 window.gtranslateSettings = window.gtranslateSettings || {};
 
 window.gtranslateSettings['43217984'] = {
-default_language: "en",
 
-languages: [
-"en", "te", "hi", "es", "zh-CN", "ar", "fr", "de", "pt", "ru",
-"ja", "ko", "it", "ta", "kn", "ml", "bn", "mr", "gu", "pa", "ur",
-"af", "sq", "am", "fa", "ps", "hy", "az", "eu", "be", "bs", "bg",
-"ca", "ceb", "ny", "zh-TW", "co", "hr", "cs", "da", "nl", "eo",
-"et", "tl", "fi", "fy", "gl", "ka", "el", "ht", "ha", "haw",
-"iw", "hmn", "hu", "is", "ig", "id", "ga", "jw", "kk", "km",
-"ku", "ky", "lo", "la", "lv", "lt", "lb", "mk", "mg", "ms",
-"mt", "mi", "mn", "my", "ne", "no", "pl", "ro", "sm", "gd",
-"sr", "st", "sn", "sd", "si", "sk", "sl", "so", "su", "sw",
-"sv", "tg", "th", "tr", "uk", "uz", "vi", "cy", "xh", "yi",
-"yo", "zu"
-],
+    default_language: "en",
 
-wrapper_selector: "#gt-mordadam-43217984",
-native_language_names: 1,
-flag_style: "2d",
-flag_size: 24,
-horizontal_position: "inline",
-flags_location: "https://jedidiahjskjournal.github.io/flags/"
+    languages: [
+        "en", "te", "hi", "es", "zh-CN", "ar", "fr", "de", "pt", "ru",
+        "ja", "ko", "it", "ta", "kn", "ml", "bn", "mr", "gu", "pa", "ur",
+        "af", "sq", "am", "fa", "ps", "hy", "az", "eu", "be", "bs", "bg",
+        "ca", "ceb", "ny", "zh-TW", "co", "hr", "cs", "da", "nl", "eo",
+        "et", "tl", "fi", "fy", "gl", "ka", "el", "ht", "ha", "haw",
+        "iw", "hmn", "hu", "is", "ig", "id", "ga", "jw", "kk", "km",
+        "ku", "ky", "lo", "la", "lv", "lt", "lb", "mk", "mg", "ms",
+        "mt", "mi", "mn", "my", "ne", "no", "pl", "ro", "sm", "gd",
+        "sr", "st", "sn", "sd", "si", "sk", "sl", "so", "su", "sw",
+        "sv", "tg", "th", "tr", "uk", "uz", "vi", "cy", "xh", "yi",
+        "yo", "zu"
+    ],
+
+    wrapper_selector: "#gt-mordadam-43217984",
+
+    native_language_names: 1,
+    flag_style: "2d",
+    flag_size: 24,
+    horizontal_position: "inline",
+
+    flags_location: "https://jedidiahjskjournal.github.io/flags/"
+
 };
+
 </script>
 
 </head>
 
 <body>
 
+<!-- ======================================
+     NAVIGATION
+====================================== -->
+
 <header class="topbar">
+
 <nav class="nav">
 
-<div class="brand">A CELEBRATION OF LOVE</div>
+    <div class="brand">
+        A CELEBRATION OF LOVE
+    </div>
 
-<div class="navlinks">
-<a href="#home">Home</a>
-<a href="#countdown">Countdown</a>
-<a href="#events">Events</a>
-<a href="#venue">Venue</a>
-<a href="#rsvp">RSVP</a>
-</div>
+    <div class="navlinks">
 
-<div class="navtools">
+        <a href="#home">Home</a>
+        <a href="#countdown">Countdown</a>
+        <a href="#events">Events</a>
+        <a href="#venue">Venue</a>
+        <a href="#rsvp">RSVP</a>
 
-<!-- GTRANSLATE WIDGET -->
-<div class="translator-bar">
-<div id="gt-mordadam-43217984"></div>
-</div>
+    </div>
 
-<button class="outline" id="shareBtn" type="button">
-Share
-</button>
+    <div class="navtools">
 
-</div>
+        <!-- LANGUAGE TRANSLATOR -->
+
+        <div class="translator-bar">
+            <div id="gt-mordadam-43217984"></div>
+        </div>
+
+        <!-- SHARE -->
+
+        <button
+            class="outline"
+            id="shareBtn"
+            type="button"
+        >
+            Share
+        </button>
+
+        <!-- MUSIC BESIDE SHARE -->
+
+        <button
+            class="music"
+            id="musicBtn"
+            type="button"
+            aria-label="Play or pause background music"
+            aria-pressed="false"
+        >
+            ♫
+        </button>
+
+    </div>
+
 </nav>
+
 </header>
+
+<!-- ======================================
+     MAIN CONTENT
+====================================== -->
 
 <main>
 
 <!-- HERO SECTION -->
 
 <section class="hero" id="home">
-<div class="hero-inner">
 
-<div class="eyebrow">Together with our families</div>
+    <div class="hero-inner">
 
-<div class="ornament">✧ ❦ ✧</div>
+        <div class="eyebrow">
+            Together with our families
+        </div>
 
-<h1>
-Jedidiah
-<small>weds</small>
-Neelima
-</h1>
+        <div class="ornament">
+            ✧ ❦ ✧
+        </div>
 
-<p class="hero-sub">
-With joyful hearts and family prayers,<br>
-we invite you to celebrate the Holy Matrimony of
-</p>
+        <h1>
+            Jedidiah
+            <small>weds</small>
+            Neelima
+        </h1>
 
-<div class="hero-date">
-WEDNESDAY · 16 DECEMBER 2026 · 10:00 AM
-</div>
+        <p class="hero-sub">
+            With joyful hearts and family prayers,<br>
+            we invite you to celebrate the Holy Matrimony of
+        </p>
 
-<div class="actions">
-<a class="btn" href="#countdown">Save the Date</a>
-<a class="btn outline" href="#venue">View Venue</a>
-</div>
+        <div class="hero-date">
+            WEDNESDAY · 16 DECEMBER 2026 · 10:00 AM
+        </div>
 
-</div>
+        <div class="actions">
+
+            <a class="btn" href="#countdown">
+                Save the Date
+            </a>
+
+            <a class="btn outline" href="#venue">
+                View Venue
+            </a>
+
+        </div>
+
+    </div>
+
 </section>
 
 <!-- COUNTDOWN -->
 
 <section class="section dark" id="countdown">
+
 <div class="wrap">
 
-<div class="head">
-<div class="eyebrow">THE COUNTDOWN BEGINS</div>
-<h2>Until We Say “I Do”</h2>
-<p>We look forward to celebrating this blessed day with you.</p>
+    <div class="head">
+
+        <div class="eyebrow">
+            THE COUNTDOWN BEGINS
+        </div>
+
+        <h2>Until We Say “I Do”</h2>
+
+        <p>
+            We look forward to celebrating this blessed day with you.
+        </p>
+
+    </div>
+
+    <div class="countdown">
+
+        <div class="countbox">
+            <strong id="days">--</strong>
+            <span>Days</span>
+        </div>
+
+        <div class="countbox">
+            <strong id="hours">--</strong>
+            <span>Hours</span>
+        </div>
+
+        <div class="countbox">
+            <strong id="minutes">--</strong>
+            <span>Minutes</span>
+        </div>
+
+        <div class="countbox">
+            <strong id="seconds">--</strong>
+            <span>Seconds</span>
+        </div>
+
+    </div>
+
 </div>
 
-<div class="countdown">
-
-<div class="countbox">
-<strong id="days">--</strong>
-<span>Days</span>
-</div>
-
-<div class="countbox">
-<strong id="hours">--</strong>
-<span>Hours</span>
-</div>
-
-<div class="countbox">
-<strong id="minutes">--</strong>
-<span>Minutes</span>
-</div>
-
-<div class="countbox">
-<strong id="seconds">--</strong>
-<span>Seconds</span>
-</div>
-
-</div>
-</div>
 </section>
 
 <!-- INVITATION -->
 
 <section class="section light" id="invitation">
+
 <div class="wrap">
 
-<div class="head">
-<div class="eyebrow">A FAMILY INVITATION</div>
-<h2>Wedding Invitation</h2>
-<p>“Marriage is honourable in all.” - Hebrews 13:4</p>
+    <div class="head">
+
+        <div class="eyebrow">
+            A FAMILY INVITATION
+        </div>
+
+        <h2>Wedding Invitation</h2>
+
+        <p>
+            “Marriage is honourable in all.” - Hebrews 13:4
+        </p>
+
+    </div>
+
+    <div class="invite-copy">
+
+        We cordially invite your gracious presence with family prayers
+        to share the joy on the Holy Matrimony of our younger son
+
+        <br>
+
+        <strong>Jedidiah (JSK)</strong>
+
+        <br>
+
+        with
+
+        <br>
+
+        <strong>Neelima</strong>.
+
+        <br><br>
+
+        Grace the occasion and bless the couple.
+
+    </div>
+
+    <div class="detail-grid">
+
+        <div class="detail">
+
+            <div class="eyebrow">
+                OFFICIATING PASTORS
+            </div>
+
+            <h3>With God's Blessings</h3>
+
+            <p>
+                Rev. Dr. K. Daniel Solomon Garu<br>
+                Senior Pastor
+            </p>
+
+            <p>
+                Rev. S. Sudhir Kumar Garu<br>
+                Associate Pastor
+            </p>
+
+        </div>
+
+        <div class="detail">
+
+            <div class="eyebrow">
+                INVITED BY
+            </div>
+
+            <h3>With Love</h3>
+
+            <p>Sri Nelluri Ratna</p>
+
+            <p>Smt. Krishnaveni (Krupaveni)</p>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div class="invite-copy">
-We cordially invite your gracious presence with family prayers to share the joy on the Holy Matrimony of our younger son
-<br>
-<strong>Jedidiah (JSK)</strong>
-<br>
-with
-<br>
-<strong>Neelima</strong>.
-<br><br>
-Grace the occasion and bless the couple.
-</div>
-
-<div class="detail-grid">
-
-<div class="detail">
-<div class="eyebrow">OFFICIATING PASTORS</div>
-<h3>With God's Blessings</h3>
-<p>
-Rev. Dr. K. Daniel Solomon Garu<br>
-Senior Pastor
-</p>
-<p>
-Rev. S. Sudhir Kumar Garu<br>
-Associate Pastor
-</p>
-</div>
-
-<div class="detail">
-<div class="eyebrow">INVITED BY</div>
-<h3>With Love</h3>
-<p>Sri Nelluri Ratna</p>
-<p>Smt. Krishnaveni (Krupaveni)</p>
-</div>
-
-</div>
-</div>
 </section>
 
 <!-- WEDDING EVENTS -->
 
 <section class="section dark" id="events">
+
 <div class="wrap">
 
-<div class="head">
-<div class="eyebrow">JOIN OUR CELEBRATION</div>
-<h2>Wedding Events</h2>
-<p>A blessed ceremony followed by a joyful gathering with family and friends.</p>
+    <div class="head">
+
+        <div class="eyebrow">
+            JOIN OUR CELEBRATION
+        </div>
+
+        <h2>Wedding Events</h2>
+
+        <p>
+            A blessed ceremony followed by a joyful gathering
+            with family and friends.
+        </p>
+
+    </div>
+
+    <div class="events">
+
+        <article class="event">
+
+            <div class="eyebrow">
+                10:00 AM
+            </div>
+
+            <h3>Holy Matrimony</h3>
+
+            <p>Wednesday, 16 December 2026</p>
+
+            <p>Baptist Church Sanathnagar</p>
+
+        </article>
+
+        <article class="event">
+
+            <div class="eyebrow">
+                Following the ceremony
+            </div>
+
+            <h3>Reception & Lunch</h3>
+
+            <p>Join us after the wedding ceremony</p>
+
+            <p>Sanathnagar, Hyderabad</p>
+
+        </article>
+
+    </div>
+
 </div>
 
-<div class="events">
-
-<article class="event">
-<div class="eyebrow">10:00 AM</div>
-<h3>Holy Matrimony</h3>
-<p>Wednesday, 16 December 2026</p>
-<p>Baptist Church Sanathnagar</p>
-</article>
-
-<article class="event">
-<div class="eyebrow">Following the ceremony</div>
-<h3>Reception & Lunch</h3>
-<p>Join us after the wedding ceremony</p>
-<p>Sanathnagar, Hyderabad</p>
-</article>
-
-</div>
-</div>
 </section>
 
 <!-- INVITATION VIDEO -->
 
 <section class="section light" id="film">
+
 <div class="wrap">
 
-<div class="head">
-<div class="eyebrow">A LITTLE FILM OF LOVE</div>
-<h2>Our Invitation Film</h2>
-<p>Watch our wedding invitation video.</p>
+    <div class="head">
+
+        <div class="eyebrow">
+            A LITTLE FILM OF LOVE
+        </div>
+
+        <h2>Our Invitation Film</h2>
+
+        <p>
+            Watch our wedding invitation video.
+        </p>
+
+    </div>
+
+    <div class="video-frame">
+
+        <video controls playsinline preload="metadata">
+
+            <source
+                src="assets/wedding-invitation.mp4"
+                type="video/mp4"
+            >
+
+            Your browser does not support video playback.
+
+        </video>
+
+    </div>
+
+    <p class="form-note" style="text-align:center">
+
+        Add your video as assets/wedding-invitation.mp4
+        to display it here.
+
+    </p>
+
 </div>
 
-<div class="video-frame">
-<video controls playsinline preload="metadata">
-<source src="assets/wedding-invitation.mp4" type="video/mp4">
-Your browser does not support video playback.
-</video>
-</div>
-
-<p class="form-note" style="text-align:center">
-Add your video as assets/wedding-invitation.mp4 to display it here.
-</p>
-
-</div>
 </section>
 
 <!-- VENUE -->
 
 <section class="section dark" id="venue">
+
 <div class="wrap">
 
-<div class="head">
-<div class="eyebrow">WE LOOK FORWARD TO SEEING YOU</div>
-<h2>The Wedding Venue</h2>
+    <div class="head">
+
+        <div class="eyebrow">
+            WE LOOK FORWARD TO SEEING YOU
+        </div>
+
+        <h2>The Wedding Venue</h2>
+
+    </div>
+
+    <div class="venue">
+
+        <div class="ornament">
+            ✧ ❦ ✧
+        </div>
+
+        <h3>Baptist Church Sanathnagar</h3>
+
+        <p>
+            Bungalow No. 17, Czech Colony, Street No. 3,<br>
+            Sanathnagar, Hyderabad, Telangana.
+        </p>
+
+        <p>
+            <strong>
+                Wednesday, 16 December 2026 · 10:00 AM
+            </strong>
+        </p>
+
+        <a
+            class="btn"
+            href="https://www.google.com/maps/search/?api=1&query=Baptist+Church+Sanathnagar%2C+Bungalow+No.+17%2C+Czech+Colony%2C+Street+No.+3%2C+Sanathnagar%2C+Hyderabad"
+            target="_blank"
+            rel="noopener"
+        >
+            Open Google Maps
+        </a>
+
+    </div>
+
 </div>
 
-<div class="venue">
-
-<div class="ornament">✧ ❦ ✧</div>
-
-<h3>Baptist Church Sanathnagar</h3>
-
-<p>
-Bungalow No. 17, Czech Colony, Street No. 3,<br>
-Sanathnagar, Hyderabad, Telangana.
-</p>
-
-<p>
-<strong>Wednesday, 16 December 2026 · 10:00 AM</strong>
-</p>
-
-<a class="btn"
-href="https://www.google.com/maps/search/?api=1&query=Baptist+Church+Sanathnagar%2C+Bungalow+No.+17%2C+Czech+Colony%2C+Street+No.+3%2C+Sanathnagar%2C+Hyderabad"
-target="_blank"
-rel="noopener">
-Open Google Maps
-</a>
-
-</div>
-</div>
 </section>
 
 <!-- RSVP -->
 
 <section class="section rsvp" id="rsvp">
+
 <div class="wrap">
 
-<div class="head">
-<div class="eyebrow">KINDLY RESPOND</div>
-<h2>Will You Join Us?</h2>
-<p>Your presence will make our celebration complete.</p>
+    <div class="head">
+
+        <div class="eyebrow">
+            KINDLY RESPOND
+        </div>
+
+        <h2>Will You Join Us?</h2>
+
+        <p>
+            Your presence will make our celebration complete.
+        </p>
+
+    </div>
+
+    <form class="rsvp-form" id="rsvpForm">
+
+        <div class="field">
+
+            <label for="guestName">
+                Your name
+            </label>
+
+            <input
+                id="guestName"
+                required
+                placeholder="Enter your name"
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="guestCount">
+                Number of guests
+            </label>
+
+            <input
+                id="guestCount"
+                type="number"
+                min="1"
+                max="20"
+                value="1"
+                required
+            >
+
+        </div>
+
+        <div class="field">
+
+            <label for="attendance">
+                Your response
+            </label>
+
+            <select id="attendance">
+
+                <option>Joyfully Accept</option>
+                <option>Regretfully Decline</option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label for="guestMessage">
+                Message (optional)
+            </label>
+
+            <textarea
+                id="guestMessage"
+                placeholder="Leave us a lovely note"
+            ></textarea>
+
+        </div>
+
+        <button type="submit">
+            Send RSVP on WhatsApp
+        </button>
+
+        <p class="form-note">
+            Your RSVP will be sent directly to the wedding WhatsApp contact.
+        </p>
+
+    </form>
+
 </div>
 
-<form class="rsvp-form" id="rsvpForm">
-
-<div class="field">
-<label for="guestName">Your name</label>
-<input id="guestName" required placeholder="Enter your name">
-</div>
-
-<div class="field">
-<label for="guestCount">Number of guests</label>
-<input id="guestCount" type="number" min="1" max="20" value="1" required>
-</div>
-
-<div class="field">
-<label for="attendance">Your response</label>
-<select id="attendance">
-<option>Joyfully Accept</option>
-<option>Regretfully Decline</option>
-</select>
-</div>
-
-<div class="field">
-<label for="guestMessage">Message (optional)</label>
-<textarea id="guestMessage" placeholder="Leave us a lovely note"></textarea>
-</div>
-
-<button type="submit">Send RSVP on WhatsApp</button>
-
-<p class="form-note">
-Your RSVP will be sent directly to the wedding WhatsApp contact.
-</p>
-
-</form>
-</div>
 </section>
 
 </main>
 
-<!-- FOOTER -->
+<!-- ======================================
+     FOOTER
+====================================== -->
 
 <footer>
 
-<div class="ornament">✧ ❦ ✧</div>
+    <div class="ornament">
+        ✧ ❦ ✧
+    </div>
 
-<div class="names">Jedidiah & Neelima</div>
+    <div class="names">
+        Jedidiah & Neelima
+    </div>
 
-<p>WITH LOVE, TOGETHER WITH OUR FAMILIES</p>
+    <p>
+        WITH LOVE, TOGETHER WITH OUR FAMILIES
+    </p>
 
-<p>“Marriage is honourable in all.” · Hebrews 13:4</p>
+    <p>
+        “Marriage is honourable in all.” · Hebrews 13:4
+    </p>
 
 </footer>
 
-<!-- BACKGROUND MUSIC -->
+<!-- ======================================
+     BACKGROUND MUSIC
+====================================== -->
 
 <audio id="bgMusic" loop preload="none">
-<source src="assets/background-music.mp3" type="audio/mpeg">
+
+    <source
+        src="assets/background-music.mp3"
+        type="audio/mpeg"
+    >
+
 </audio>
 
-<button class="music" id="musicBtn" type="button" aria-label="Play or pause background music">
-♫
-</button>
+<!-- ======================================
+     MAIN JAVASCRIPT
+====================================== -->
 
 <script>
 
@@ -939,8 +1427,11 @@ Your RSVP will be sent directly to the wedding WhatsApp contact.
 // ======================================
 
 const CONFIG = {
-weddingDate: "2026-12-16T10:00:00+05:30",
-whatsappNumber: "919030827969"
+
+    weddingDate: "2026-12-16T10:00:00+05:30",
+
+    whatsappNumber: "919030827969"
+
 };
 
 const $ = id => document.getElementById(id);
@@ -952,34 +1443,43 @@ const $ = id => document.getElementById(id);
 
 function tick(){
 
-const ms = new Date(CONFIG.weddingDate).getTime() - Date.now();
+    const ms =
+        new Date(CONFIG.weddingDate).getTime() - Date.now();
 
-if(ms <= 0){
+    if(ms <= 0){
 
-["days","hours","minutes","seconds"].forEach(id => {
-$(id).textContent = "00";
-});
+        ["days","hours","minutes","seconds"].forEach(id => {
 
-return;
-}
+            $(id).textContent = "00";
 
-$("days").textContent = Math.floor(ms / 86400000);
+        });
 
-$("hours").textContent = String(
-Math.floor(ms % 86400000 / 3600000)
-).padStart(2,"0");
+        return;
 
-$("minutes").textContent = String(
-Math.floor(ms % 3600000 / 60000)
-).padStart(2,"0");
+    }
 
-$("seconds").textContent = String(
-Math.floor(ms % 60000 / 1000)
-).padStart(2,"0");
+    $("days").textContent =
+        Math.floor(ms / 86400000);
+
+    $("hours").textContent =
+        String(
+            Math.floor(ms % 86400000 / 3600000)
+        ).padStart(2,"0");
+
+    $("minutes").textContent =
+        String(
+            Math.floor(ms % 3600000 / 60000)
+        ).padStart(2,"0");
+
+    $("seconds").textContent =
+        String(
+            Math.floor(ms % 60000 / 1000)
+        ).padStart(2,"0");
 
 }
 
 tick();
+
 setInterval(tick,1000);
 
 
@@ -989,39 +1489,39 @@ setInterval(tick,1000);
 
 $("shareBtn").addEventListener("click",async()=>{
 
-const data = {
+    const data = {
 
-title: document.title,
+        title:document.title,
 
-text: "Join Jedidiah & Neelima for their wedding on 16 December 2026.",
+        text:"Join Jedidiah & Neelima for their wedding on 16 December 2026.",
 
-url: location.href
+        url:location.href
 
-};
+    };
 
-if(navigator.share){
+    if(navigator.share){
 
-try{
+        try{
 
-await navigator.share(data);
+            await navigator.share(data);
 
-}catch(e){}
+        }catch(e){}
 
-}else{
+    }else{
 
-try{
+        try{
 
-await navigator.clipboard.writeText(location.href);
+            await navigator.clipboard.writeText(location.href);
 
-alert("Invitation link copied!");
+            alert("Invitation link copied!");
 
-}catch(e){
+        }catch(e){
 
-prompt("Copy this link",location.href);
+            prompt("Copy this link",location.href);
 
-}
+        }
 
-}
+    }
 
 });
 
@@ -1032,29 +1532,129 @@ prompt("Copy this link",location.href);
 
 $("musicBtn").addEventListener("click",async()=>{
 
-const a = $("bgMusic");
+    const audio = $("bgMusic");
 
-if(a.paused){
+    const button = $("musicBtn");
 
-try{
+    if(audio.paused){
 
-await a.play();
+        try{
 
-$("musicBtn").textContent = "Ⅱ";
+            await audio.play();
 
-}catch(e){
+            button.textContent = "Ⅱ";
 
-alert("Please add your music file as assets/background-music.mp3.");
+            button.setAttribute("aria-pressed","true");
+
+        }catch(e){
+
+            alert(
+                "Please add your music file as assets/background-music.mp3."
+            );
+
+        }
+
+    }else{
+
+        audio.pause();
+
+        button.textContent = "♫";
+
+        button.setAttribute("aria-pressed","false");
+
+    }
+
+});
+
+
+// ======================================
+// RESET MUSIC BUTTON WHEN AUDIO ENDS
+// ======================================
+
+$("bgMusic").addEventListener("pause",()=>{
+
+    $("musicBtn").textContent = "♫";
+
+    $("musicBtn").setAttribute("aria-pressed","false");
+
+});
+
+
+// ======================================
+// TRANSLATOR — CLOSE FUNCTION
+// ======================================
+
+function closeTranslator(){
+
+    const widget = $("gt-mordadam-43217984");
+
+    if(!widget) return;
+
+    const menu = widget.querySelector(".gt_options");
+
+    if(menu){
+
+        menu.style.setProperty(
+            "display",
+            "none",
+            "important"
+        );
+
+    }
 
 }
 
-}else{
 
-a.pause();
+// ======================================
+// TRANSLATOR — OUTSIDE CLICK
+// ======================================
 
-$("musicBtn").textContent = "♫";
+document.addEventListener("pointerdown",function(e){
 
-}
+    const widget = $("gt-mordadam-43217984");
+
+    if(!widget) return;
+
+    const menu = widget.querySelector(".gt_options");
+
+    if(!menu) return;
+
+    const isVisible =
+        menu.getBoundingClientRect().width > 0 &&
+        menu.getBoundingClientRect().height > 0 &&
+        getComputedStyle(menu).display !== "none";
+
+    if(!isVisible) return;
+
+    const clickedInsideWidget =
+        widget.contains(e.target);
+
+    const clickedInsideMenu =
+        menu.contains(e.target);
+
+    if(
+        !clickedInsideWidget &&
+        !clickedInsideMenu
+    ){
+
+        closeTranslator();
+
+    }
+
+},true);
+
+
+// ======================================
+// TRANSLATOR — ESCAPE KEY
+// ======================================
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key === "Escape"){
+
+        closeTranslator();
+
+    }
 
 });
 
@@ -1065,51 +1665,55 @@ $("musicBtn").textContent = "♫";
 
 $("rsvpForm").addEventListener("submit",e=>{
 
-e.preventDefault();
+    e.preventDefault();
 
-if(!/^\d{10,15}$/.test(CONFIG.whatsappNumber)){
+    if(!/^\d{10,15}$/.test(CONFIG.whatsappNumber)){
 
-alert("The RSVP WhatsApp number is not configured. Please contact the hosts directly.");
+        alert(
+            "The RSVP WhatsApp number is not configured. Please contact the hosts directly."
+        );
 
-return;
+        return;
 
-}
+    }
 
-const msg = [
+    const msg = [
 
-"Wedding RSVP — Jedidiah & Neelima",
+        "Wedding RSVP — Jedidiah & Neelima",
 
-`Name: ${$("guestName").value}`,
+        `Name: ${$("guestName").value}`,
 
-`Guests: ${$("guestCount").value}`,
+        `Guests: ${$("guestCount").value}`,
 
-`Attendance: ${$("attendance").value}`,
+        `Attendance: ${$("attendance").value}`,
 
-`Message: ${$("guestMessage").value}`
+        `Message: ${$("guestMessage").value}`
 
-].join("\n");
+    ].join("\n");
 
-window.open(
+    window.open(
 
-`https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`,
+        `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg)}`,
 
-"_blank",
+        "_blank",
 
-"noopener"
+        "noopener"
 
-);
+    );
 
 });
 
 </script>
 
-<!-- GTRANSLATE SCRIPT -->
+<!-- ======================================
+     GTRANSLATE SCRIPT
+====================================== -->
 
 <script
-src="https://jedidiahjskjournal.github.io/js/gt.min.js"
-data-gt-widget-id="43217984"
-defer>
-</script>
+    src="https://jedidiahjskjournal.github.io/js/gt.min.js"
+    data-gt-widget-id="43217984"
+    defer
+></script>
 
 </body>
 </html>
