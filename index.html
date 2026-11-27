@@ -169,17 +169,22 @@ button,.btn{
 
 #gt-mordadam-43217984 .gt_options{
     position:fixed!important;
+
+    /* Position popup slightly below vertical centre */
     top:calc(50vh + 25px)!important;
-    left:50vw!important;
+    left:50%!important;
     right:auto!important;
     bottom:auto!important;
 
+    /* True horizontal and vertical centring */
     transform:translate(-50%,-50%)!important;
 
+    /* Popup dimensions */
     width:min(90vw,1150px)!important;
     height:auto!important;
-    max-height:65vh!important;
+    max-height:70vh!important;
 
+    /* Enable scrolling through all languages */
     overflow-y:auto!important;
     overflow-x:hidden!important;
 
@@ -187,11 +192,14 @@ button,.btn{
     padding:8px 0!important;
     box-sizing:border-box!important;
 
+    /* Keep popup above website content */
     z-index:999999!important;
 
-    background:#ffffff!important;
+    /* Wedding theme colours */
+    background:#2a060c!important;
+    color:var(--ivory)!important;
     border:1px solid var(--gold)!important;
-    border-radius:5px!important;
+    border-radius:8px!important;
     box-shadow:0 15px 50px rgba(0,0,0,.65)!important;
 
     overscroll-behavior:contain;
@@ -203,6 +211,8 @@ button,.btn{
     align-items:center!important;
     min-height:42px!important;
     padding:11px 16px!important;
+    color:var(--ivory)!important;
+    text-decoration:none!important;
 }
 
 #gt-mordadam-43217984 .gt_options a:hover{
@@ -660,10 +670,10 @@ footer p{
         height:200px;
     }
 
+    /* Keep popup centred and scrollable on mobile */
     #gt-mordadam-43217984 .gt_options{
         width:94vw!important;
         max-height:70vh!important;
-        top:50vh!important;
     }
 }
 
@@ -695,7 +705,7 @@ window.gtranslateSettings['43217984'] = {
         "ja","ko","it","ta","kn","ml","bn","mr","gu","pa","ur",
         "af","sq","am","fa","ps","hy","az","eu","be","bs","bg",
         "ca","ceb","ny","zh-TW","co","hr","cs","da","nl","eo",
-        "et","tl","fi","fy","gl","ka","el","ht","ha","haw",
+        "et","tl","fi","fy","fy","gl","ka","el","ht","ha","haw",
         "iw","hmn","hu","is","ig","id","ga","jw","kk","km",
         "ku","ky","lo","la","lv","lt","lb","mk","mg","ms",
         "mt","mi","mn","my","ne","no","pl","ro","sm","gd",
